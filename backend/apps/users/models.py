@@ -6,7 +6,7 @@ class User(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     password = models.CharField(max_length=50)
     email = models.EmailField(unique=True)
-    user_name = models.CharField(max_length=50, verbose_name="Nome de Usuário", unique=True)
+    username = models.CharField(max_length=50, verbose_name="Nome de Usuário", unique=True)
     avatar = models.ImageField(upload_to="avatars/", default="blank-profile-picture.png")
     status_online = models.BooleanField(default=False)
     wins = models.IntegerField(default=0)

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
-from apps.users.forms import UserLoginForm, CustomUserCreationForm
+from apps.users.forms import UserLoginForm
 
 def home(request):
     if not request.user.is_authenticated:
@@ -9,15 +9,7 @@ def home(request):
     return render(request, "users/home.html")
 
 def register(request):
-    form = CustomUserCreationForm()
-    if request.method == "POST":
-        form = CustomUserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            auth.login(request, user)
-            return redirect("home")
-
-    return render(request, "users/register.html", { "form": form })
+    return render(request, "users/register.html")
 
 def login(request):
     form = UserLoginForm()
@@ -26,17 +18,17 @@ def login(request):
         if form.is_valid():
             name = form.cleaned_data["name"]
             password = form.cleaned_data["password"]
-
+            
             user = auth.authenticate(
                 request,
                 username=name,
                 password=password,
             )
-
+            
             if user is not None:
                 auth.login(request, user)
                 return redirect("home")
 
             return redirect("login")
-
+    
     return render(request, "users/login.html", { "form": form })

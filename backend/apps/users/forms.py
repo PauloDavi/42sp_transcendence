@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from apps.users.models import User
 
 class UserLoginForm(forms.Form):
   name = forms.CharField(
@@ -23,3 +25,10 @@ class UserLoginForm(forms.Form):
       }
     ),
   )
+
+class CustomUserCreationForm(UserCreationForm):
+    password_confirm = forms.CharField(max_length=50)
+
+    class Meta:
+        model = User
+        fields = ["username", "email", "password", "password_confirm"]
