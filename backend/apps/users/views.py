@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
-from apps.users.forms import UserLoginForm, CustomUserCreationForm
+from apps.users.forms import UserLoginForm, CustomUserCreationForm, ChatForm
+from apps.users.models import Messages
 
 def home(request):
     if not request.user.is_authenticated:
@@ -40,3 +41,13 @@ def login(request):
             return redirect("login")
 
     return render(request, "users/login.html", { "form": form })
+
+def chat(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    form = ChatForm()
+    if request.method == "POST":
+        form = ChatForm(request.POST)
+
+
+    return render(request, "users/chat.html", { "form": form })

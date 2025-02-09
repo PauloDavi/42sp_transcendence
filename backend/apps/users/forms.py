@@ -32,3 +32,10 @@ class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ["username", "email", "password", "password_confirm"]
+
+
+class ChatForm(forms.Form):
+  content = forms.CharField(
+    label='Sua mensagem',
+    required=True
+    )
