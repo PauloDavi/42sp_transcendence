@@ -19,4 +19,4 @@ RUN chmod +x entrypoint.sh \
     -subj "/C=BR/ST=SP/L=SP/O=42/CN=localhost"
 
 ENTRYPOINT ["./entrypoint.sh"]
-CMD ["gunicorn", "--certfile=/app/ssl/django.crt", "--keyfile=./ssl/django.key", "--bind", "0.0.0.0:443", "setup.wsgi:application"]
+CMD ["gunicorn", "--certfile=/app/ssl/django.crt", "--keyfile=./ssl/django.key", "--reload", "--bind", "0.0.0.0:443", "setup.wsgi:application"]
