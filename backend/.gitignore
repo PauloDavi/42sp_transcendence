@@ -9,7 +9,11 @@ __pycache__/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
-media
+
+# Custom
+static/
+media/
+!media/avatars/blank-profile-picture.png
 ssl
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
