@@ -17,6 +17,8 @@ def register(request):
             user = form.save()
             auth.login(request, user)
             return redirect("home")
+        else:
+            print(form.errors)
 
     return render(request, "users/register.html", { "form": form })
 
