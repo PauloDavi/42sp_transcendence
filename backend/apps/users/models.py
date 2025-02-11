@@ -12,7 +12,7 @@ class User(AbstractUser):
     avatar = models.ImageField(
         verbose_name="Avatar",
         upload_to="avatars/",
-        default="blank-profile-picture.png"
+        default="avatars/blank-profile-picture.png"
     )
     status_online = models.BooleanField(default=False)
     wins = models.IntegerField(default=0, verbose_name="Vitórias")

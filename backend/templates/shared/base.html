@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" data-bs-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -27,7 +27,11 @@
   </head>
 
   <body>
-    {% block content %}{% endblock %}
+    <main>
+      {% include "shared/partials/_navbar.html" %}
+      {% block content %}{% endblock %}
+    </main>
+
     {% include "shared/partials/_messages.html" %}
   </body>
 
@@ -36,4 +40,5 @@
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"
   ></script>
+  <script src="{% static '/js/theme-toggle.js' %}"></script>
 </html>

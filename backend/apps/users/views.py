@@ -1,27 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
-from apps.users.forms import UserLoginForm, UserCreationForm, ChatForm
+from apps.users.forms import UserLoginForm, UserCreationForm, UserEditProfileForm, ChatForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 @login_required
 def home(request):
     return render(request, "users/home.html")
-
-def register(request):
-    if request.user.is_authenticated:
-        return redirect("home")
-    
-    form = UserCreationForm()
-    if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            auth.login(request, user)
-            messages.success(request, "Usuário criado com sucesso")
-            return redirect("home")
-
-    return render(request, "users/register.html", { "form": form })
 
 def login(request):
     if request.user.is_authenticated:
@@ -50,6 +35,44 @@ def login(request):
 
     return render(request, "users/login.html", { "form": form })
 
+def logout(request):
+    messages.success(request, "Usuário deslogado com sucesso")
+    auth.logout(request)
+    return redirect("login")
+
+def register(request):
+    if request.user.is_authenticated:
+        return redirect("home")
+    
+    form = UserCreationForm()
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            auth.login(request, user)
+            messages.success(request, "Usuário criado com sucesso")
+            return redirect("home")
+
+    return render(request, "users/register.html", { "form": form })
+
+@login_required
+def update_user(request):
+    if request.method == 'POST':
+        form = UserEditProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save(user=request.user)
+            messages.success(request, 'Seu perfil foi atualizado com sucesso!')
+            return redirect('home')
+    else:
+        print(request.user.avatar)
+        initial_data = {
+            'email': request.user.email,
+            'avatar': request.user.avatar,
+        }
+        form = UserEditProfileForm(initial=initial_data)
+
+    return render(request, "users/update_user.html", { "form": form })
+
 @login_required
 def chat(request):
     form = ChatForm()
@@ -57,8 +80,3 @@ def chat(request):
         form = ChatForm(request.POST)
 
     return render(request, "users/chat.html", { "form": form })
-
-def logout(request):
-    messages.success(request, "Usuário deslogado com sucesso")
-    auth.logout(request)
-    return redirect("login")

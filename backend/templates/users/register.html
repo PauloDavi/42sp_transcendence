@@ -3,22 +3,24 @@
   <div class="mx-auto container-sm bg-body-secondary p-4 rounded-3">
     <h1>Cadastro</h1>
     <form action="{% url 'register' %}" method="post">
-      {% csrf_token %} {% for field in form.visible_fields %}
-      <div class="form-group mt-3 mb">
-        <label for="{{ field.id_for_label }}"> {{ field.label }} </label>
-        {{ field }}
+      <div class="form-group">
+        {% csrf_token %} {% for field in form.visible_fields %}
+        <div class="form-floating mt-3">
+          {{ field }}
+          <label for="{{ field.id_for_label }}"> {{ field.label }} </label>
 
-        {% if field.errors %}
-        <div class="invalid-feedback d-block">
-          {% for error in field.errors %}
-            {{ error }}
-          {% endfor %}
+          {% if field.errors %}
+          <div class="invalid-feedback d-block">
+            {% for error in field.errors %}
+              {{ error }}
+            {% endfor %}
+          </div>
+          {% endif %}
         </div>
-        {% endif %}
+        {% endfor %}
+        <button type="submit" class="btn btn-primary mt-3 w-100">Cadastrar</button>
+        <a href="{% url 'login' %}" class="btn btn-secondary mt-3 w-100">Login</a>
       </div>
-      {% endfor %}
-      <button type="submit" class="btn btn-primary mt-3 w-100">Cadastrar</button>
-      <a href="{% url 'login' %}" class="btn btn-secondary mt-3 w-100">Login</a>
     </form>
   </div>
 </div>
