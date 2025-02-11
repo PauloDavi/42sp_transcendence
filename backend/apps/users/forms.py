@@ -1,27 +1,28 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm as BaseUserCreationForm
 from apps.users.models import User
+from django.utils.translation import gettext as _
 
 class UserLoginForm(forms.Form):
     name = forms.CharField(
-        label="Nome de login",
+        label=_("Nome de login"),
         required=True,
         max_length=100,
         widget=forms.TextInput(
             attrs={
                 "class": "form-control",
-                "placeholder": "Ex: João Silva"
+                "placeholder": _("Ex: João Silva"),
             }
         ),
     )
     password = forms.CharField(
-        label="Sua senha",
+        label=_("Sua senha"),
         required=True,
         max_length=100,
         widget=forms.PasswordInput(
             attrs={
                 "class": "form-control",
-                "placeholder": "Digite sua senha"
+                "placeholder": _("Digite sua senha"),
             }
         ),
     )
@@ -38,20 +39,20 @@ class UserCreationForm(BaseUserCreationForm):
         fields = ["username", "email", "password1", "password2"]
         
         labels = {
-          "username": "Nome de usuário",
-          "email": "E-mail",
-          "password1": "Senha",
-          "password2": "Confirme sua senha",
+            "username": _("Nome de usuário"),
+            "email": _("E-mail"),
+            "password1": _("Senha"),
+            "password2": _("Confirme sua senha"),
         }
         
         widgets = {
-          "username": forms.TextInput(attrs={"class": "form-control", "placeholder": "Ex: João Silva"}),
-          "email": forms.TextInput(attrs={"class": "form-control", "placeholder": "Ex: joao@silva.com"}),
+            "username": forms.TextInput(attrs={"class": "form-control", "placeholder": _("Ex: João Silva")}),
+            "email": forms.TextInput(attrs={"class": "form-control", "placeholder": _("Ex: joao@silva.com")}),
         }
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        for field_name, placeholder in {"password1": "Crie uma senha", "password2": "Confirme sua senha"}.items():
+        for field_name, placeholder in {"password1": _("Crie uma senha"), "password2": _("Confirme sua senha")}.items():
             self.fields[field_name].widget.attrs.update({
                 "class": "form-control",
                 "placeholder": placeholder,
@@ -81,13 +82,13 @@ class UserEditProfileForm(forms.Form):
         required=False,
         max_length=50,
         label='Senha',
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Senha'}),
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': _('Senha')}),
     )
     password2 = forms.CharField(
         required=False,
         max_length=50,
         label='Confirme sua senha',
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Confirme sua senha'}),
+        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': _('Confirme sua senha')}),
     )
 
     def clean_password2(self):
@@ -95,7 +96,7 @@ class UserEditProfileForm(forms.Form):
         password2 = self.cleaned_data.get("password2")
 
         if password1 and password2 and password1 != password2:
-            raise forms.ValidationError("As senhas não coincidem.")
+            raise forms.ValidationError(_("As senhas não coincidem."))
         return password2
 
     def save(self, user, commit=True):
@@ -116,6 +117,6 @@ class UserEditProfileForm(forms.Form):
 
 class ChatForm(forms.Form):
     content = forms.CharField(
-        label="Sua mensagem",
+        label=_("Sua mensagem"),
         required=True
     )

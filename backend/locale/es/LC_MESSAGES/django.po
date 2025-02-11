@@ -1,0 +1,188 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-11 20:56-0300\n"
+"PO-Revision-Date: 2025-02-11 20:55-0300\n"
+"Last-Translator:   <super@gmail.co>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? "
+"1 : 2;\n"
+"X-Translated-Using: django-rosetta 0.10.1\n"
+
+#: apps/users/forms.py:8
+msgid "Nome de login"
+msgstr "Nombre de usuario"
+
+#: apps/users/forms.py:14 apps/users/forms.py:49
+msgid "Ex: João Silva"
+msgstr "Ej: Juan Silva"
+
+#: apps/users/forms.py:19
+msgid "Sua senha"
+msgstr "Tu contraseña"
+
+#: apps/users/forms.py:25
+msgid "Digite sua senha"
+msgstr "Ingresa tu contraseña"
+
+#: apps/users/forms.py:42
+msgid "Nome de usuário"
+msgstr "Nombre de usuario"
+
+#: apps/users/forms.py:43
+msgid "E-mail"
+msgstr "E-mail"
+
+#: apps/users/forms.py:44 apps/users/forms.py:85
+msgid "Senha"
+msgstr "Contraseña"
+
+#: apps/users/forms.py:45 apps/users/forms.py:55 apps/users/forms.py:91
+msgid "Confirme sua senha"
+msgstr "Confirma tu contraseña"
+
+#: apps/users/forms.py:50
+msgid "Ex: joao@silva.com"
+msgstr "Ej: joao@silva.com"
+
+#: apps/users/forms.py:55
+msgid "Crie uma senha"
+msgstr "Crear una contraseña"
+
+#: apps/users/forms.py:99
+msgid "As senhas não coincidem."
+msgstr "Las contraseñas no coinciden."
+
+#: apps/users/forms.py:120
+msgid "Sua mensagem"
+msgstr "Tu mensaje"
+
+#: apps/users/models.py:14
+msgid "Avatar"
+msgstr "Avatar"
+
+#: apps/users/models.py:19
+msgid "Vitórias"
+msgstr "Victorias"
+
+#: apps/users/models.py:20
+msgid "Derrotas"
+msgstr "Derrotas"
+
+#: apps/users/models.py:21
+msgid "Criado em"
+msgstr "Creado en"
+
+#: apps/users/models.py:22
+msgid "Atualizado em"
+msgstr "Actualizado el"
+
+#: apps/users/models.py:28
+msgid "Usuário"
+msgstr "Usuario"
+
+#: apps/users/models.py:29
+msgid "Usuários"
+msgstr "Usuarios"
+
+#: setup/settings.py:95
+msgid "Português"
+msgstr "Portugués"
+
+#: setup/settings.py:96
+msgid "Inglês"
+msgstr "Inglés"
+
+#: setup/settings.py:97
+msgid "Espanhol"
+msgstr "Español"
+
+#: templates/shared/partials/_messages.html:22
+msgid "Sucesso"
+msgstr "Éxito"
+
+#: templates/shared/partials/_messages.html:24
+msgid "Erro"
+msgstr "Error"
+
+#: templates/shared/partials/_messages.html:26
+msgid "Alerta"
+msgstr "Alerta"
+
+#: templates/shared/partials/_messages.html:28
+msgid "Informação"
+msgstr "Información"
+
+#: templates/shared/partials/_navbar.html:14
+msgid "Foto do usuário"
+msgstr "Foto de usuario"
+
+#: templates/shared/partials/_navbar.html:21
+msgid "Tema"
+msgstr "Tema"
+
+#: templates/shared/partials/_navbar.html:26
+msgid "Claro"
+msgstr "Claro"
+
+#: templates/shared/partials/_navbar.html:31
+msgid "Escuro"
+msgstr "Oscuro"
+
+#: templates/shared/partials/_navbar.html:36
+msgid "Automático"
+msgstr "Automático"
+
+#: templates/shared/partials/_navbar.html:44
+msgid "Lingua"
+msgstr "idioma"
+
+#: templates/users/chat.html:7
+msgid "Chat"
+msgstr "Charlar"
+
+#: templates/users/chat.html:15
+msgid "Enviar"
+msgstr "Para enviar"
+
+#: templates/users/home.html:5
+msgid "Bem-vindo ao meu site!"
+msgstr "¡Bienvenido a mi sitio web!"
+
+#: templates/users/login.html:7 templates/users/register.html:25
+msgid "Login"
+msgstr "Conectar"
+
+#: templates/users/login.html:24
+msgid "Logar"
+msgstr "Acceso"
+
+#: templates/users/login.html:25 templates/users/register.html:24
+msgid "Cadastrar"
+msgstr "Registro"
+
+#: templates/users/register.html:7
+msgid "Cadastro"
+msgstr "Registro"
+
+#: templates/users/update_user.html:7
+msgid "Atualize seu perfil"
+msgstr "Actualiza tu perfil"
+
+#: templates/users/update_user.html:31
+msgid "Salvar"
+msgstr "Ahorrar"
+
+#~ msgid "Mudar idioma"
+#~ msgstr "Cambiar idioma"

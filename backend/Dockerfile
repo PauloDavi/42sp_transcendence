@@ -12,6 +12,9 @@ RUN pip install -r requirements.txt
 COPY . /app/
 
 RUN chmod +x entrypoint.sh \
+  && apt update \
+  && apt install -y gettext \
+  && rm -rf /var/lib/apt/lists/* \
   && mkdir -p ./ssl \
   && openssl req -x509 -nodes -days 365 \
     -newkey rsa:2048 -keyout /app/ssl/django.key \

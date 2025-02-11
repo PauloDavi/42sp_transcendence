@@ -1,3 +1,4 @@
+{% load i18n %}
 {% if messages %}
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
   {% for message in messages %}
@@ -18,13 +19,13 @@
     <div class="toast-header">
       <strong class="me-auto">
         {% if message.tags == 'success' %}
-          Sucesso
+          {% translate "Sucesso" %}
         {% elif message.tags == 'danger' %}
-          Erro
+          {% translate "Erro" %}
         {% elif message.tags == 'warning' %}
-          Alerta
+          {% translate "Alerta" %}
         {% else %}
-          Informação
+          {% translate "Informação" %}
         {% endif %}
       </strong>
       <button
