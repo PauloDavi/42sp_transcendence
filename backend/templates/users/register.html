@@ -7,10 +7,18 @@
       <div class="form-group mt-3 mb">
         <label for="{{ field.id_for_label }}"> {{ field.label }} </label>
         {{ field }}
+
+        {% if field.errors %}
+        <div class="invalid-feedback d-block">
+          {% for error in field.errors %}
+            {{ error }}
+          {% endfor %}
+        </div>
+        {% endif %}
       </div>
       {% endfor %}
-      <button type="submit" class="btn btn-primary mt-3 w-100">Logar</button>
-      <a href="{% url 'login' %}" class="btn btn-primary mt-3 w-100">Login</a>
+      <button type="submit" class="btn btn-primary mt-3 w-100">Cadastrar</button>
+      <a href="{% url 'login' %}" class="btn btn-secondary mt-3 w-100">Login</a>
     </form>
   </div>
 </div>

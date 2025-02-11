@@ -1,10 +1,11 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm as BaseUserCreationForm
+from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from apps.users.models import User
 
 class UserLoginForm(forms.Form):
   name = forms.CharField(
-    label='Nome de login',
+    label="Nome de login",
     required=True,
     max_length=100,
     widget=forms.TextInput(
@@ -15,7 +16,7 @@ class UserLoginForm(forms.Form):
     ),
   )
   password = forms.CharField(
-    label='Sua senha',
+    label="Sua senha",
     required=True,
     max_length=100,
     widget=forms.PasswordInput(
@@ -26,16 +27,40 @@ class UserLoginForm(forms.Form):
     ),
   )
 
-class CustomUserCreationForm(UserCreationForm):
-    password_confirm = forms.CharField(max_length=50)
+class UserCreationForm(BaseUserCreationForm):
+    class Meta:
+        model = User
+        fields = ["username", "email", "password1", "password2"]
+        
+        labels = {
+          "username": "Nome de usuário",
+          "email": "E-mail",
+          "password1": "Senha",
+          "password2": "Confirme sua senha",
+        }
+        
+        widgets = {
+          "username": forms.TextInput(attrs={"class": "form-control", "placeholder": "Ex: João Silva"}),
+          "email": forms.TextInput(attrs={"class": "form-control", "placeholder": "Ex: joao@silva.com"}),
+        }
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, placeholder in {"password1": "Crie uma senha", "password2": "Confirme sua senha"}.items():
+            self.fields[field_name].widget.attrs.update({
+                "class": "form-control",
+                "placeholder": placeholder,
+            })
+
+class UserChangeForm(forms.ModelForm):
+    password = ReadOnlyPasswordHashField()
 
     class Meta:
         model = User
-        fields = ["username", "email", "password", "password_confirm"]
-
+        fields = ["email", "password"]
 
 class ChatForm(forms.Form):
-  content = forms.CharField(
-    label='Sua mensagem',
-    required=True
+    content = forms.CharField(
+        label="Sua mensagem",
+        required=True
     )

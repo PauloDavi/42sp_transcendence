@@ -1,0 +1,41 @@
+{% if messages %}
+<div class="toast-container position-fixed bottom-0 end-0 p-3">
+  {% for message in messages %}
+  <div
+    class="toast fade show bg-{{ message.tags }}
+      {% if message.tags == 'success' or message.tags == 'danger' %}
+        text-white
+      {% else %}
+        text-dark
+      {% endif %}
+    "
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+    data-bs-autohide="true"
+    data-bs-delay="3000"
+  >
+    <div class="toast-header">
+      <strong class="me-auto">
+        {% if message.tags == 'success' %}
+          Sucesso
+        {% elif message.tags == 'danger' %}
+          Erro
+        {% elif message.tags == 'warning' %}
+          Alerta
+        {% else %}
+          Informação
+        {% endif %}
+      </strong>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="toast"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="toast-body">{{ message }}</div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
