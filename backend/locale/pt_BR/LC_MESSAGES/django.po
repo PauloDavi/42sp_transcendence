@@ -1,0 +1,207 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-11 21:10-0300\n"
+"PO-Revision-Date: 2025-02-11 21:11-0300\n"
+"Last-Translator:   <super@gmail.co>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Translated-Using: django-rosetta 0.10.1\n"
+
+#: apps/users/forms.py:8
+msgid "Nome de login"
+msgstr "Nome de login"
+
+#: apps/users/forms.py:14 apps/users/forms.py:49
+msgid "Ex: João Silva"
+msgstr "Ex: João Silva"
+
+#: apps/users/forms.py:19
+msgid "Sua senha"
+msgstr "Sua senha"
+
+#: apps/users/forms.py:25
+msgid "Digite sua senha"
+msgstr "Digite sua senha"
+
+#: apps/users/forms.py:42
+msgid "Nome de usuário"
+msgstr "Foto do usuário"
+
+#: apps/users/forms.py:43
+msgid "E-mail"
+msgstr "E-mail"
+
+#: apps/users/forms.py:44 apps/users/forms.py:85
+msgid "Senha"
+msgstr "Senha"
+
+#: apps/users/forms.py:45 apps/users/forms.py:55 apps/users/forms.py:91
+msgid "Confirme sua senha"
+msgstr "Confirme sua senha"
+
+#: apps/users/forms.py:50
+msgid "Ex: joao@silva.com"
+msgstr "Ex: joao@silva.com"
+
+#: apps/users/forms.py:55
+msgid "Crie uma senha"
+msgstr "Crie uma senha"
+
+#: apps/users/forms.py:99
+msgid "As senhas não coincidem."
+msgstr "As senhas não coincidem."
+
+#: apps/users/forms.py:120
+msgid "Sua mensagem"
+msgstr "Sua mensagem"
+
+#: apps/users/models.py:14
+msgid "Avatar"
+msgstr "Avatar"
+
+#: apps/users/models.py:19
+msgid "Vitórias"
+msgstr "Vitórias"
+
+#: apps/users/models.py:20
+msgid "Derrotas"
+msgstr "Derrotas"
+
+#: apps/users/models.py:21
+msgid "Criado em"
+msgstr "Criado em"
+
+#: apps/users/models.py:22
+msgid "Atualizado em"
+msgstr "Atualizado em"
+
+#: apps/users/models.py:28
+msgid "Usuário"
+msgstr "Usuário"
+
+#: apps/users/models.py:29
+msgid "Usuários"
+msgstr "Usuários"
+
+#: apps/users/views.py:31
+msgid "Login realizado com sucesso"
+msgstr "Login realizado com sucesso"
+
+#: apps/users/views.py:34
+msgid "Usuário ou senha inválidos"
+msgstr "Usuário ou senha inválidos"
+
+#: apps/users/views.py:40
+msgid "Usuário deslogado com sucesso"
+msgstr "Usuário deslogado com sucesso"
+
+#: apps/users/views.py:54
+msgid "Usuário criado com sucesso"
+msgstr "Usuário criado com sucesso"
+
+#: apps/users/views.py:65
+msgid "Seu perfil foi atualizado com sucesso!"
+msgstr "Seu perfil foi atualizado com sucesso!"
+
+#: setup/settings.py:95
+msgid "Português"
+msgstr "Português"
+
+#: setup/settings.py:96
+msgid "Inglês"
+msgstr "Inglês"
+
+#: setup/settings.py:97
+msgid "Espanhol"
+msgstr "Espanhol"
+
+#: templates/shared/partials/_messages.html:22
+msgid "Sucesso"
+msgstr "Sucesso"
+
+#: templates/shared/partials/_messages.html:24
+msgid "Erro"
+msgstr "Erro"
+
+#: templates/shared/partials/_messages.html:26
+msgid "Alerta"
+msgstr "Alerta"
+
+#: templates/shared/partials/_messages.html:28
+msgid "Informação"
+msgstr "Informação"
+
+#: templates/shared/partials/_navbar.html:14
+msgid "Foto do usuário"
+msgstr "Foto do usuário"
+
+#: templates/shared/partials/_navbar.html:21
+msgid "Tema"
+msgstr "Tema"
+
+#: templates/shared/partials/_navbar.html:26
+msgid "Claro"
+msgstr "Claro"
+
+#: templates/shared/partials/_navbar.html:31
+msgid "Escuro"
+msgstr "Escuro"
+
+#: templates/shared/partials/_navbar.html:36
+msgid "Automático"
+msgstr "Automático"
+
+#: templates/shared/partials/_navbar.html:44
+msgid "Lingua"
+msgstr "Língua"
+
+#: templates/users/chat.html:7
+msgid "Chat"
+msgstr "Chat"
+
+#: templates/users/chat.html:15
+msgid "Enviar"
+msgstr "Enviar"
+
+#: templates/users/home.html:5
+msgid "Bem-vindo ao meu site!"
+msgstr "Bem-vindo ao meu site!"
+
+#: templates/users/login.html:7 templates/users/register.html:25
+msgid "Login"
+msgstr "Login"
+
+#: templates/users/login.html:24
+msgid "Logar"
+msgstr "Entrar"
+
+#: templates/users/login.html:25 templates/users/register.html:24
+msgid "Cadastrar"
+msgstr "Cadastrar"
+
+#: templates/users/register.html:7
+msgid "Cadastro"
+msgstr "Cadastro"
+
+#: templates/users/update_user.html:7
+msgid "Atualize seu perfil"
+msgstr "Atualize seu perfil"
+
+#: templates/users/update_user.html:31
+msgid "Salvar"
+msgstr "Salvar"
+
+#~ msgid "Mudar idioma"
+#~ msgstr "Mudar idioma"

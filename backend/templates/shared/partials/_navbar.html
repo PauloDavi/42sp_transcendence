@@ -1,3 +1,4 @@
+{% load i18n %}
 {% if user.is_authenticated %}
 <header class="p-3 mb-3 border-bottom">
   <div class="container">
@@ -10,31 +11,54 @@
 
       <div class="dropdown text-end">
         <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-          <img src="{{ user.avatar.url }}" alt="Foto do usuário" width="32" height="32" class="rounded-circle">
+          <img src="{{ user.avatar.url }}" alt="{% translate "Foto do usuário" %}" width="32" height="32" class="rounded-circle">
         </a>
         <ul class="dropdown-menu text-small">
           <li><a href="{% url 'update_user' %}" class="dropdown-item">Perfil</a></li>
           <li class="dropdown">
             <button class="dropdown-item dropdown-toggle" id="bd-theme" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="theme-icon-active bi bi-circle-half"></i>
-              <span class="me-5">Tema</span>
+              <span class="mx-1">{% translate "Tema" %}</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
               <li>
                 <button class="dropdown-item d-flex align-items-center active" data-bs-theme-value="light">
-                  <i class="bi bi-sun-fill me-2"></i> Claro
+                  <i class="bi bi-sun-fill me-2"></i> {% translate "Claro" %}
                 </button>
               </li>
               <li>
                 <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark">
-                  <i class="bi bi-moon-stars-fill me-2"></i> Escuro
+                  <i class="bi bi-moon-stars-fill me-2"></i> {% translate "Escuro" %}
                 </button>
               </li>
               <li>
                 <button class="dropdown-item d-flex align-items-center" data-bs-theme-value="auto">
-                  <i class="bi bi-circle-half me-2"></i> Automático
+                  <i class="bi bi-circle-half me-2"></i> {% translate "Automático" %}
                 </button>
               </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <button class="dropdown-item dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-translate"></i>
+              <span class="mx-1">{% translate "Lingua" %}</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              {% get_current_language as LANGUAGE_CODE %}
+              {% get_available_languages as LANGUAGES %}
+              {% get_language_info_list for LANGUAGES as languages %}
+              {% for language in languages %}
+                <li>
+                  <a class="dropdown-item d-flex align-items-center" href="{% url 'set_language' %}" onclick="event.preventDefault(); document.getElementById('lang-{{ language.code }}').submit();">
+                    {{ language.name_local }} ({{ language.code }})
+                  </a>
+                  <form id="lang-{{ language.code }}" action="{% url 'set_language' %}" method="post" style="display: none;">
+                    {% csrf_token %}
+                    <input type="hidden" name="language" value="{{ language.code }}">
+                    <input type="hidden" name="next" value="{{ redirect_to }}">
+                  </form>
+                </li>
+              {% endfor %}
             </ul>
           </li>
           <li><hr class="dropdown-divider"></li>
