@@ -3,7 +3,7 @@ from django.contrib import auth
 from apps.users.forms import UserLoginForm, UserCreationForm, UserEditProfileForm, ChatForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 
 @login_required
 def home(request):
@@ -81,3 +81,7 @@ def chat(request):
         form = ChatForm(request.POST)
 
     return render(request, "users/chat.html", { "form": form })
+
+@login_required
+def profile(request):
+    return render(request, "users/profile.html")

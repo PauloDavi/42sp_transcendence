@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm as BaseUserCreationForm
 from apps.users.models import User
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 
 class UserLoginForm(forms.Form):
     name = forms.CharField(
@@ -33,7 +33,7 @@ class UserLoginForm(forms.Form):
             self.fields[field].widget.attrs["class"] += " is-invalid"
         return cleaned_data
 
-class UserCreationForm(BaseUserCreationForm):
+class   UserCreationForm(BaseUserCreationForm):
     class Meta:
         model = User
         fields = ["username", "email", "password1", "password2"]
@@ -72,23 +72,23 @@ class UserChangeForm(forms.ModelForm):
 class UserEditProfileForm(forms.Form):
     email = forms.EmailField(
         required=True,
-        widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'E-mail'}),
+        widget=forms.EmailInput(attrs={"class": "form-control", "placeholder": "E-mail"}),
     )
     avatar = forms.ImageField(
         required=False,
-        widget=forms.FileInput(attrs={'class': 'form-control'}),
+        widget=forms.FileInput(attrs={"class": "form-control"}),
     )
     password1 = forms.CharField(
         required=False,
         max_length=50,
-        label='Senha',
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': _('Senha')}),
+        label=_("Senha"),
+        widget=forms.PasswordInput(attrs={"class": "form-control", "placeholder": _("Senha")}),
     )
     password2 = forms.CharField(
         required=False,
         max_length=50,
-        label='Confirme sua senha',
-        widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': _('Confirme sua senha')}),
+        label=_("Confirme sua senha"),
+        widget=forms.PasswordInput(attrs={"class": "form-control", "placeholder": _("Confirme sua senha")}),
     )
 
     def clean_password2(self):
@@ -100,11 +100,11 @@ class UserEditProfileForm(forms.Form):
         return password2
 
     def save(self, user, commit=True):
-        user.email = self.cleaned_data['email']
-        if self.cleaned_data.get('password1'):
-            user.set_password(self.cleaned_data['password1'])
-        if 'avatar' in self.cleaned_data and self.cleaned_data['avatar']:
-            user.avatar = self.cleaned_data['avatar']
+        user.email = self.cleaned_data["email"]
+        if self.cleaned_data.get("password1"):
+            user.set_password(self.cleaned_data["password1"])
+        if "avatar" in self.cleaned_data and self.cleaned_data["avatar"]:
+            user.avatar = self.cleaned_data["avatar"]
         if commit:
             user.save()
         return user

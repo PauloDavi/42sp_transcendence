@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-11 21:10-0300\n"
-"PO-Revision-Date: 2025-02-11 21:11-0300\n"
+"POT-Creation-Date: 2025-02-11 22:30-0300\n"
+"PO-Revision-Date: 2025-02-11 22:24-0300\n"
 "Last-Translator:   <super@gmail.co>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: apps/users/forms.py:8
 msgid "Nome de login"
-msgstr "Login name"
+msgstr "User name"
 
 #: apps/users/forms.py:14 apps/users/forms.py:49
 msgid "Ex: João Silva"
@@ -37,17 +37,18 @@ msgstr "Enter your password"
 
 #: apps/users/forms.py:42
 msgid "Nome de usuário"
-msgstr "User Photo"
+msgstr "User name"
 
 #: apps/users/forms.py:43
 msgid "E-mail"
 msgstr "E-mail"
 
-#: apps/users/forms.py:44 apps/users/forms.py:85
+#: apps/users/forms.py:44 apps/users/forms.py:84 apps/users/forms.py:85
 msgid "Senha"
 msgstr "Password"
 
-#: apps/users/forms.py:45 apps/users/forms.py:55 apps/users/forms.py:91
+#: apps/users/forms.py:45 apps/users/forms.py:55 apps/users/forms.py:90
+#: apps/users/forms.py:91
 msgid "Confirme sua senha"
 msgstr "Confirm your password"
 
@@ -71,19 +72,19 @@ msgstr "Your message"
 msgid "Avatar"
 msgstr "Avatar"
 
-#: apps/users/models.py:19
+#: apps/users/models.py:19 templates/users/profile.html:20
 msgid "Vitórias"
 msgstr "Victories"
 
-#: apps/users/models.py:20
+#: apps/users/models.py:20 templates/users/profile.html:21
 msgid "Derrotas"
 msgstr "Defeats"
 
-#: apps/users/models.py:21
+#: apps/users/models.py:21 templates/users/profile.html:22
 msgid "Criado em"
 msgstr "Created at"
 
-#: apps/users/models.py:22
+#: apps/users/models.py:22 templates/users/profile.html:23
 msgid "Atualizado em"
 msgstr "Updated at"
 
@@ -147,6 +148,10 @@ msgstr "Information"
 msgid "Foto do usuário"
 msgstr "User Photo"
 
+#: templates/shared/partials/_navbar.html:17
+msgid "Perfil"
+msgstr "Profile"
+
 #: templates/shared/partials/_navbar.html:21
 msgid "Tema"
 msgstr "Theme"
@@ -166,6 +171,10 @@ msgstr "Automatic"
 #: templates/shared/partials/_navbar.html:44
 msgid "Lingua"
 msgstr "Language"
+
+#: templates/shared/partials/_navbar.html:65
+msgid "Logout"
+msgstr "Logout"
 
 #: templates/users/chat.html:7
 msgid "Chat"
@@ -190,6 +199,22 @@ msgstr "Login"
 #: templates/users/login.html:25 templates/users/register.html:24
 msgid "Cadastrar"
 msgstr "Register"
+
+#: templates/users/profile.html:10
+msgid "Perfil do Usuário"
+msgstr "User Profile"
+
+#: templates/users/profile.html:17
+msgid "Online"
+msgstr "Online"
+
+#: templates/users/profile.html:17
+msgid "Offline"
+msgstr "Offline"
+
+#: templates/users/profile.html:24
+msgid "Editar Perfil"
+msgstr "Edit Profile"
 
 #: templates/users/register.html:7
 msgid "Cadastro"

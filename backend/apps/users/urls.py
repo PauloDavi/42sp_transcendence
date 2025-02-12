@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from apps.users.views import home, login, logout, register, update_user, chat
+from apps.users.views import home, login, logout, register, update_user, chat, profile
 
 urlpatterns = [
     path("", home, name="home"),
@@ -8,5 +8,6 @@ urlpatterns = [
     path("logout", logout, name="logout"),
     path("register", register, name="register"),
     path("user/edit", update_user, name="update_user"),
+    path("user", profile, name="profile"),
     path("chat", chat, name="chat"),
 ]

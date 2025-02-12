@@ -8,15 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-11 21:10-0300\n"
-"PO-Revision-Date: 2025-02-11 21:12-0300\n"
+"POT-Creation-Date: 2025-02-11 22:30-0300\n"
+"PO-Revision-Date: 2025-02-11 22:25-0300\n"
 "Last-Translator:   <super@gmail.co>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? "
+"1 : 2;\n"
 "X-Translated-Using: django-rosetta 0.10.1\n"
 
 #: apps/users/forms.py:8
@@ -43,11 +44,12 @@ msgstr "Nombre de usuario"
 msgid "E-mail"
 msgstr "E-mail"
 
-#: apps/users/forms.py:44 apps/users/forms.py:85
+#: apps/users/forms.py:44 apps/users/forms.py:84 apps/users/forms.py:85
 msgid "Senha"
 msgstr "Contraseña"
 
-#: apps/users/forms.py:45 apps/users/forms.py:55 apps/users/forms.py:91
+#: apps/users/forms.py:45 apps/users/forms.py:55 apps/users/forms.py:90
+#: apps/users/forms.py:91
 msgid "Confirme sua senha"
 msgstr "Confirma tu contraseña"
 
@@ -71,19 +73,19 @@ msgstr "Tu mensaje"
 msgid "Avatar"
 msgstr "Avatar"
 
-#: apps/users/models.py:19
+#: apps/users/models.py:19 templates/users/profile.html:20
 msgid "Vitórias"
 msgstr "Victorias"
 
-#: apps/users/models.py:20
+#: apps/users/models.py:20 templates/users/profile.html:21
 msgid "Derrotas"
 msgstr "Derrotas"
 
-#: apps/users/models.py:21
+#: apps/users/models.py:21 templates/users/profile.html:22
 msgid "Criado em"
 msgstr "Creado en"
 
-#: apps/users/models.py:22
+#: apps/users/models.py:22 templates/users/profile.html:23
 msgid "Atualizado em"
 msgstr "Actualizado el"
 
@@ -147,6 +149,10 @@ msgstr "Información"
 msgid "Foto do usuário"
 msgstr "Foto de usuario"
 
+#: templates/shared/partials/_navbar.html:17
+msgid "Perfil"
+msgstr "Perfil"
+
 #: templates/shared/partials/_navbar.html:21
 msgid "Tema"
 msgstr "Tema"
@@ -166,6 +172,10 @@ msgstr "Automático"
 #: templates/shared/partials/_navbar.html:44
 msgid "Lingua"
 msgstr "idioma"
+
+#: templates/shared/partials/_navbar.html:65
+msgid "Logout"
+msgstr "Logout"
 
 #: templates/users/chat.html:7
 msgid "Chat"
@@ -190,6 +200,22 @@ msgstr "Acceso"
 #: templates/users/login.html:25 templates/users/register.html:24
 msgid "Cadastrar"
 msgstr "Registro"
+
+#: templates/users/profile.html:10
+msgid "Perfil do Usuário"
+msgstr "Perfil de usuario"
+
+#: templates/users/profile.html:17
+msgid "Online"
+msgstr "En línea"
+
+#: templates/users/profile.html:17
+msgid "Offline"
+msgstr "Desconectado"
+
+#: templates/users/profile.html:24
+msgid "Editar Perfil"
+msgstr "Editar perfil"
 
 #: templates/users/register.html:7
 msgid "Cadastro"
