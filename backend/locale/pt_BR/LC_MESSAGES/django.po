@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-11 21:10-0300\n"
+"POT-Creation-Date: 2025-02-11 21:55-0300\n"
 "PO-Revision-Date: 2025-02-11 21:11-0300\n"
 "Last-Translator:   <super@gmail.co>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,8 +63,10 @@ msgstr "Crie uma senha"
 msgid "As senhas não coincidem."
 msgstr "As senhas não coincidem."
 
-#: apps/users/forms.py:120
-msgid "Sua mensagem"
+#: apps/users/forms.py:119
+#, fuzzy
+#| msgid "Sua mensagem"
+msgid "Sua mensagem..."
 msgstr "Sua mensagem"
 
 #: apps/users/models.py:14

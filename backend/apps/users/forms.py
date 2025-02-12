@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm as BaseUserCreationForm
-from apps.users.models import User
+from apps.users.models import User, Messages
 from django.utils.translation import gettext as _
 
 class UserLoginForm(forms.Form):
@@ -116,7 +116,8 @@ class UserEditProfileForm(forms.Form):
         return cleaned_data
 
 class ChatForm(forms.Form):
-    content = forms.CharField(
-        label=_("Sua mensagem"),
-        required=True
-    )
+    content = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': _('Sua mensagem...')}))
+    
+    def save(self, sender, receiver=None, commit=True):
+        message = Messages(sender=sender, receiver=receiver, content=self.cleaned_data['content'])
+        message.save()

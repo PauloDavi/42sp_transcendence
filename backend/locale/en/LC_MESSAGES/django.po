@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-11 21:10-0300\n"
-"PO-Revision-Date: 2025-02-11 21:11-0300\n"
-"Last-Translator:   <super@gmail.co>\n"
+"POT-Creation-Date: 2025-02-11 21:59-0300\n"
+"PO-Revision-Date: 2025-02-11 21:58-0300\n"
+"Last-Translator:   <super@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -63,8 +63,8 @@ msgstr "Create a password"
 msgid "As senhas não coincidem."
 msgstr "Passwords do not match."
 
-#: apps/users/forms.py:120
-msgid "Sua mensagem"
+#: apps/users/forms.py:119
+msgid "Sua mensagem..."
 msgstr "Your message"
 
 #: apps/users/models.py:14
