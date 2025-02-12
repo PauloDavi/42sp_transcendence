@@ -22,12 +22,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     
-    'rosetta',
+    "rosetta",
     
     "apps.users.apps.UsersConfig",
 ]
 MIDDLEWARE = [
-    'django.middleware.locale.LocaleMiddleware',
+    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -92,12 +92,12 @@ TIME_ZONE = "America/Sao_Paulo"
 USE_I18N = True
 USE_TZ = True
 LANGUAGES = [
-    ('pt-br', _('Português')),
-    ('en', _('Inglês')),
-    ('es', _('Espanhol')),
+    ("pt-br", _("Português")),
+    ("en", _("Inglês")),
+    ("es", _("Espanhol")),
 ]
 LOCALE_PATHS = [
-    os.path.join(BASE_DIR, 'locale'),
+    os.path.join(BASE_DIR, "locale"),
 ]
 
 # Static files (CSS, JavaScript, Images)

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-11 20:56-0300\n"
-"PO-Revision-Date: 2025-02-11 20:51-0300\n"
+"POT-Creation-Date: 2025-02-11 21:10-0300\n"
+"PO-Revision-Date: 2025-02-11 21:11-0300\n"
 "Last-Translator:   <super@gmail.co>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -94,6 +94,26 @@ msgstr "Usuário"
 #: apps/users/models.py:29
 msgid "Usuários"
 msgstr "Usuários"
+
+#: apps/users/views.py:31
+msgid "Login realizado com sucesso"
+msgstr "Login realizado com sucesso"
+
+#: apps/users/views.py:34
+msgid "Usuário ou senha inválidos"
+msgstr "Usuário ou senha inválidos"
+
+#: apps/users/views.py:40
+msgid "Usuário deslogado com sucesso"
+msgstr "Usuário deslogado com sucesso"
+
+#: apps/users/views.py:54
+msgid "Usuário criado com sucesso"
+msgstr "Usuário criado com sucesso"
+
+#: apps/users/views.py:65
+msgid "Seu perfil foi atualizado com sucesso!"
+msgstr "Seu perfil foi atualizado com sucesso!"
 
 #: setup/settings.py:95
 msgid "Português"
