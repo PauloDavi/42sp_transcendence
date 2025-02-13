@@ -82,6 +82,10 @@ def chat(request):
     form = ChatForm()
     if request.method == "POST":
         form = ChatForm(request.POST)
+        if form.is_valid():
+            form.save(sender=request.user, receiver=request.user)
+            messages.success(request, _("Mensagem enviada com sucesso!"))
+            return redirect("chat")
 
     return render(request, "users/chat.html", { "form": form })
 

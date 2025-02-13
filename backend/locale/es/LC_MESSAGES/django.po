@@ -16,7 +16,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? "
+"1 : 2;\n"
 "X-Translated-Using: django-rosetta 0.10.1\n"
 
 #: apps/users/forms.py:8
@@ -64,8 +65,8 @@ msgstr "Crear una contraseña"
 msgid "As senhas não coincidem."
 msgstr "Las contraseñas no coinciden."
 
-#: apps/users/forms.py:120
-msgid "Sua mensagem"
+#: apps/users/forms.py:119
+msgid "Sua mensagem..."
 msgstr "Tu mensaje"
 
 #: apps/users/models.py:14 templates/users/profile.html:50

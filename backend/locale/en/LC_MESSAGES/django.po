@@ -64,8 +64,8 @@ msgstr "Create a password"
 msgid "As senhas não coincidem."
 msgstr "Passwords do not match."
 
-#: apps/users/forms.py:120
-msgid "Sua mensagem"
+#: apps/users/forms.py:119
+msgid "Sua mensagem..."
 msgstr "Your message"
 
 #: apps/users/models.py:14 templates/users/profile.html:50

@@ -64,8 +64,10 @@ msgstr "Crie uma senha"
 msgid "As senhas não coincidem."
 msgstr "As senhas não coincidem."
 
-#: apps/users/forms.py:120
-msgid "Sua mensagem"
+#: apps/users/forms.py:119
+#, fuzzy
+#| msgid "Sua mensagem"
+msgid "Sua mensagem..."
 msgstr "Sua mensagem"
 
 #: apps/users/models.py:14 templates/users/profile.html:50
