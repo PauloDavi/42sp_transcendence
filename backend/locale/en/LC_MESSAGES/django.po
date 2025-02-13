@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-12 21:58-0300\n"
-"PO-Revision-Date: 2025-02-12 22:04-0300\n"
-"Last-Translator:   <super@gmail.co>\n"
+"POT-Creation-Date: 2025-02-13 10:25-0300\n"
+"PO-Revision-Date: 2025-02-13 10:27-0300\n"
+"Last-Translator:   <super@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -118,7 +118,6 @@ msgid "Status"
 msgstr "Status"
 
 #: apps/users/models.py:55
-#| msgid "Atualizado em"
 msgid "Amizade"
 msgstr "Friendship"
 
@@ -146,49 +145,49 @@ msgstr "User created successfully"
 msgid "Seu perfil foi atualizado com sucesso!"
 msgstr "Your profile has been updated successfully!"
 
-#: apps/users/views.py:110
+#: apps/users/views.py:87
+#| msgid "Amigo removido com sucesso!"
+msgid "Mensagem enviada com sucesso!"
+msgstr "Message sent successfully!"
+
+#: apps/users/views.py:114
 msgid "Você não pode adicionar a si mesmo como amigo!"
 msgstr "You can't add yourself as a friend!"
 
-#: apps/users/views.py:114 apps/users/views.py:129 apps/users/views.py:171
-#: apps/users/views.py:191
-#| msgid "Usuário ou senha inválidos"
+#: apps/users/views.py:118 apps/users/views.py:133 apps/users/views.py:175
+#: apps/users/views.py:195
 msgid "Usuário não encontrado!"
 msgstr "User not found!"
 
-#: apps/users/views.py:122
+#: apps/users/views.py:126
 msgid "Solicitação de amizade enviada com sucesso!"
 msgstr "Friend request sent successfully!"
 
-#: apps/users/views.py:137 apps/users/views.py:179 apps/users/views.py:199
-#| msgid "Usuário ou senha inválidos"
+#: apps/users/views.py:141 apps/users/views.py:183 apps/users/views.py:203
 msgid "Amigo não encontrado!"
 msgstr "Friend not found!"
 
-#: apps/users/views.py:141
-#| msgid "Login realizado com sucesso"
+#: apps/users/views.py:145
 msgid "Amigo removido com sucesso!"
 msgstr "Friend successfully removed!"
 
-#: apps/users/views.py:184
-#| msgid "Usuário criado com sucesso"
+#: apps/users/views.py:188
 msgid "Amigo aceito com sucesso!"
 msgstr "Friend accepted successfully!"
 
-#: apps/users/views.py:204
-#| msgid "Login realizado com sucesso"
+#: apps/users/views.py:208
 msgid "Amigo rejeitado com sucesso!"
 msgstr "Friend rejected successfully!"
 
-#: setup/settings.py:95
+#: setup/settings.py:102
 msgid "Português"
 msgstr "Portuguese"
 
-#: setup/settings.py:96
+#: setup/settings.py:103
 msgid "Inglês"
 msgstr "English"
 
-#: setup/settings.py:97
+#: setup/settings.py:104
 msgid "Espanhol"
 msgstr "Spanish"
 
@@ -313,12 +312,10 @@ msgid "Você ainda não tem amigos adicionados."
 msgstr "You have no friends added yet."
 
 #: templates/users/profile.html:128
-#| msgid "Usuário ou senha inválidos"
 msgid "Nenhum usuário encontrado"
 msgstr "No users found"
 
 #: templates/users/profile.html:136
-#| msgid "Foto do usuário"
 msgid "Erro ao buscar usuários"
 msgstr "Error searching for users"
 
