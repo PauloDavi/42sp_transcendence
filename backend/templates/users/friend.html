@@ -1,0 +1,27 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+<div class="w-100 ps-4 pb-4 pt-2 row">
+    <div class="container col-12 col-md-4">
+        <div class="card text-center">
+            <div class="card-header">
+                <h4>{% translate "Perfil do Usuário" %} - {{ friend.username }}</h4>
+            </div>
+            <div class="card-body">
+                <img src="{{ friend.avatar.url }}" alt="Avatar" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                <h5 class="card-title">{{ friend.email }}</h5>
+                <p class="card-text">
+                    <span class="badge bg-{% if friend.status_online %}success{% else %}secondary{% endif %}">
+                        {% if friend.status_online %}{% translate "Online" %}{% else %}{% translate "Offline" %}{% endif %}
+                    </span>
+                </p>
+                <p class="card-text">{% translate "Vitórias" %}: <strong>{{ friend.wins }}</strong></p>
+                <p class="card-text">{% translate "Derrotas" %}: <strong>{{ friend.losses }}</strong></p>
+                <p class="text-muted">{% translate "Criado em" %}: {{ friend.created_at|date:"d/m/Y H:i" }}</p>
+                <p class="text-muted">{% translate "Atualizado em" %}: {{ friend.updated_at|date:"d/m/Y H:i" }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

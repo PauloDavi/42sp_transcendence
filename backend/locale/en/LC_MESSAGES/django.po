@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-11 21:59-0300\n"
-"PO-Revision-Date: 2025-02-11 21:58-0300\n"
-"Last-Translator:   <super@gmail.com>\n"
+"POT-Creation-Date: 2025-02-12 21:58-0300\n"
+"PO-Revision-Date: 2025-02-12 22:04-0300\n"
+"Last-Translator:   <super@gmail.co>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: apps/users/forms.py:8
 msgid "Nome de login"
-msgstr "Login name"
+msgstr "User name"
 
 #: apps/users/forms.py:14 apps/users/forms.py:49
 msgid "Ex: João Silva"
@@ -37,17 +37,18 @@ msgstr "Enter your password"
 
 #: apps/users/forms.py:42
 msgid "Nome de usuário"
-msgstr "User Photo"
+msgstr "User name"
 
 #: apps/users/forms.py:43
 msgid "E-mail"
 msgstr "E-mail"
 
-#: apps/users/forms.py:44 apps/users/forms.py:85
+#: apps/users/forms.py:44 apps/users/forms.py:84 apps/users/forms.py:85
 msgid "Senha"
 msgstr "Password"
 
-#: apps/users/forms.py:45 apps/users/forms.py:55 apps/users/forms.py:91
+#: apps/users/forms.py:45 apps/users/forms.py:55 apps/users/forms.py:90
+#: apps/users/forms.py:91
 msgid "Confirme sua senha"
 msgstr "Confirm your password"
 
@@ -67,23 +68,28 @@ msgstr "Passwords do not match."
 msgid "Sua mensagem..."
 msgstr "Your message"
 
-#: apps/users/models.py:14
+#: apps/users/models.py:14 templates/users/profile.html:50
+#: templates/users/profile.html:107
 msgid "Avatar"
 msgstr "Avatar"
 
-#: apps/users/models.py:19
+#: apps/users/models.py:19 templates/users/friend.html:19
+#: templates/users/profile.html:19
 msgid "Vitórias"
 msgstr "Victories"
 
-#: apps/users/models.py:20
+#: apps/users/models.py:20 templates/users/friend.html:20
+#: templates/users/profile.html:20
 msgid "Derrotas"
 msgstr "Defeats"
 
-#: apps/users/models.py:21
+#: apps/users/models.py:21 apps/users/models.py:51
+#: templates/users/friend.html:21 templates/users/profile.html:21
 msgid "Criado em"
 msgstr "Created at"
 
-#: apps/users/models.py:22
+#: apps/users/models.py:22 apps/users/models.py:52
+#: templates/users/friend.html:22 templates/users/profile.html:22
 msgid "Atualizado em"
 msgstr "Updated at"
 
@@ -95,25 +101,84 @@ msgstr "User"
 msgid "Usuários"
 msgstr "Users"
 
-#: apps/users/views.py:31
+#: apps/users/models.py:36
+msgid "Pending"
+msgstr "Pending"
+
+#: apps/users/models.py:37
+msgid "Accepted"
+msgstr "Accepted"
+
+#: apps/users/models.py:38
+msgid "Rejected"
+msgstr "Rejected"
+
+#: apps/users/models.py:49
+msgid "Status"
+msgstr "Status"
+
+#: apps/users/models.py:55
+#| msgid "Atualizado em"
+msgid "Amizade"
+msgstr "Friendship"
+
+#: apps/users/models.py:56
+msgid "Amizades"
+msgstr "Friendships"
+
+#: apps/users/views.py:34
 msgid "Login realizado com sucesso"
 msgstr "Login successful"
 
-#: apps/users/views.py:34
+#: apps/users/views.py:37
 msgid "Usuário ou senha inválidos"
 msgstr "Invalid username or password"
 
-#: apps/users/views.py:40
+#: apps/users/views.py:43
 msgid "Usuário deslogado com sucesso"
 msgstr "User successfully logged out"
 
-#: apps/users/views.py:54
+#: apps/users/views.py:57
 msgid "Usuário criado com sucesso"
 msgstr "User created successfully"
 
-#: apps/users/views.py:65
+#: apps/users/views.py:68
 msgid "Seu perfil foi atualizado com sucesso!"
 msgstr "Your profile has been updated successfully!"
+
+#: apps/users/views.py:110
+msgid "Você não pode adicionar a si mesmo como amigo!"
+msgstr "You can't add yourself as a friend!"
+
+#: apps/users/views.py:114 apps/users/views.py:129 apps/users/views.py:171
+#: apps/users/views.py:191
+#| msgid "Usuário ou senha inválidos"
+msgid "Usuário não encontrado!"
+msgstr "User not found!"
+
+#: apps/users/views.py:122
+msgid "Solicitação de amizade enviada com sucesso!"
+msgstr "Friend request sent successfully!"
+
+#: apps/users/views.py:137 apps/users/views.py:179 apps/users/views.py:199
+#| msgid "Usuário ou senha inválidos"
+msgid "Amigo não encontrado!"
+msgstr "Friend not found!"
+
+#: apps/users/views.py:141
+#| msgid "Login realizado com sucesso"
+msgid "Amigo removido com sucesso!"
+msgstr "Friend successfully removed!"
+
+#: apps/users/views.py:184
+#| msgid "Usuário criado com sucesso"
+msgid "Amigo aceito com sucesso!"
+msgstr "Friend accepted successfully!"
+
+#: apps/users/views.py:204
+#| msgid "Login realizado com sucesso"
+msgid "Amigo rejeitado com sucesso!"
+msgstr "Friend rejected successfully!"
 
 #: setup/settings.py:95
 msgid "Português"
@@ -147,6 +212,10 @@ msgstr "Information"
 msgid "Foto do usuário"
 msgstr "User Photo"
 
+#: templates/shared/partials/_navbar.html:17
+msgid "Perfil"
+msgstr "Profile"
+
 #: templates/shared/partials/_navbar.html:21
 msgid "Tema"
 msgstr "Theme"
@@ -167,6 +236,10 @@ msgstr "Automatic"
 msgid "Lingua"
 msgstr "Language"
 
+#: templates/shared/partials/_navbar.html:65
+msgid "Logout"
+msgstr "Logout"
+
 #: templates/users/chat.html:7
 msgid "Chat"
 msgstr "Chat"
@@ -174,6 +247,18 @@ msgstr "Chat"
 #: templates/users/chat.html:15
 msgid "Enviar"
 msgstr "Submit"
+
+#: templates/users/friend.html:9 templates/users/profile.html:9
+msgid "Perfil do Usuário"
+msgstr "User Profile"
+
+#: templates/users/friend.html:16 templates/users/profile.html:16
+msgid "Online"
+msgstr "Online"
+
+#: templates/users/friend.html:16 templates/users/profile.html:16
+msgid "Offline"
+msgstr "Offline"
 
 #: templates/users/home.html:5
 msgid "Bem-vindo ao meu site!"
@@ -190,6 +275,52 @@ msgstr "Login"
 #: templates/users/login.html:25 templates/users/register.html:24
 msgid "Cadastrar"
 msgstr "Register"
+
+#: templates/users/profile.html:23
+msgid "Editar Perfil"
+msgstr "Edit Profile"
+
+#: templates/users/profile.html:31
+msgid "Amigos"
+msgstr "Friends"
+
+#: templates/users/profile.html:36
+msgid "Buscar usuário..."
+msgstr "Search user..."
+
+#: templates/users/profile.html:56
+msgid "Aceitar convite"
+msgstr "Accept invitation"
+
+#: templates/users/profile.html:57
+msgid "Recusar convite"
+msgstr "Decline invitation"
+
+#: templates/users/profile.html:60
+msgid "Convite recusado"
+msgstr "Invitation declined"
+
+#: templates/users/profile.html:62
+msgid "Você recusou a amizade"
+msgstr "You refused friendship"
+
+#: templates/users/profile.html:64
+msgid "Convite pendente"
+msgstr "Invitation pending"
+
+#: templates/users/profile.html:74
+msgid "Você ainda não tem amigos adicionados."
+msgstr "You have no friends added yet."
+
+#: templates/users/profile.html:128
+#| msgid "Usuário ou senha inválidos"
+msgid "Nenhum usuário encontrado"
+msgstr "No users found"
+
+#: templates/users/profile.html:136
+#| msgid "Foto do usuário"
+msgid "Erro ao buscar usuários"
+msgstr "Error searching for users"
 
 #: templates/users/register.html:7
 msgid "Cadastro"

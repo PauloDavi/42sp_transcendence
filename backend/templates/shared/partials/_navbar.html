@@ -1,6 +1,6 @@
 {% load i18n %}
 {% if user.is_authenticated %}
-<header class="p-3 mb-3 border-bottom">
+<header class="p-3 mb-3 border-bottom bg-body-tertiary">
   <div class="container">
     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
       <h2 class="m-0">Pong 42</h2>
@@ -14,7 +14,7 @@
           <img src="{{ user.avatar.url }}" alt="{% translate "Foto do usuário" %}" width="32" height="32" class="rounded-circle">
         </a>
         <ul class="dropdown-menu text-small">
-          <li><a href="{% url 'update_user' %}" class="dropdown-item">Perfil</a></li>
+          <li><a href="{% url 'profile' %}" class="dropdown-item">{% translate "Perfil" %}</a></li>
           <li class="dropdown">
             <button class="dropdown-item dropdown-toggle" id="bd-theme" type="button" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="theme-icon-active bi bi-circle-half"></i>
@@ -62,7 +62,7 @@
             </ul>
           </li>
           <li><hr class="dropdown-divider"></li>
-          <li><a href="{% url 'logout' %}" class="dropdown-item">Logout</a></li>
+          <li><a href="{% url 'logout' %}" class="dropdown-item">{% translate "Logout" %}</a></li>
         </ul>
       </div>
     </div>

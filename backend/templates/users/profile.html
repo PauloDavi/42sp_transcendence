@@ -1,0 +1,150 @@
+{% extends 'shared/base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+<div class="w-100 ps-4 pb-4 pt-2 row">
+    <div class="container col-12 col-md-4">
+        <div class="card text-center">
+            <div class="card-header">
+                <h4>{% translate "Perfil do Usuário" %}</h4>
+            </div>
+            <div class="card-body">
+                <img src="{{ user.avatar.url }}" alt="Avatar" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                <h5 class="card-title">{{ user.email }}</h5>
+                <p class="card-text">
+                    <span class="badge bg-{% if user.status_online %}success{% else %}secondary{% endif %}">
+                        {% if user.status_online %}{% translate "Online" %}{% else %}{% translate "Offline" %}{% endif %}
+                    </span>
+                </p>
+                <p class="card-text">{% translate "Vitórias" %}: <strong>{{ user.wins }}</strong></p>
+                <p class="card-text">{% translate "Derrotas" %}: <strong>{{ user.losses }}</strong></p>
+                <p class="text-muted">{% translate "Criado em" %}: {{ user.created_at|date:"d/m/Y H:i" }}</p>
+                <p class="text-muted">{% translate "Atualizado em" %}: {{ user.updated_at|date:"d/m/Y H:i" }}</p>
+                <a href="{% url 'update_user' %}" class="btn btn-primary mt-3">{% translate "Editar Perfil" %}</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="justify-content-center col-12 col-md-8 mt-4 mt-md-0">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="me-2">{% translate "Amigos" %}</h4>
+                <form class="d-flex" method="post" action="{% url 'add_friend' %}">
+                    {% csrf_token %}
+                    <div class="position-relative">
+                        <input type="hidden" id="user-id-input" name="friend_id">
+                        <input class="form-control" type="text" id="search-user" name="friend_email" placeholder="{% translate "Buscar usuário..." %}" autocomplete="off">
+                        <div id="user-dropdown" class="dropdown-menu w-100 shadow" style="display: none; max-height: 250px; overflow-y: auto;"></div>
+                    </div>
+                    
+                    <button id="add-friend-button" disabled class="btn btn-outline-success ms-2" type="submit">
+                        <i class="bi bi-person-add"></i>
+                    </button>
+                </form>
+            </div>
+            <div class="card-body">
+                {% if friends %}
+                    <ul class="list-group">
+                        {% for friend in friends %}
+                            <li class="list-group-item d-flex align-items-center">
+                                <img src="{{ friend.avatar }}" alt="{% translate "Avatar" %}" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                                <div class="flex-grow-1">
+                                    <a href="{% url 'friend_profile' friend.id %}"><strong>{{ friend.username }}</strong></a>
+                                </div>
+                                {% if not friend.is_request and friend.status == "PENDING" %}
+                                    <div class="d-flex flex-md-row flex-column gap-2">
+                                        <a href="{% url 'accept_friend' friend.id %}" class="btn btn-success text-light text-decoration-none ">{% translate "Aceitar convite" %}</a>
+                                        <a href="{% url 'reject_friend' friend.id %}" class="btn btn-danger text-light text-decoration-none">{% translate "Recusar convite" %}</a>
+                                    </div>
+                                {% elif friend.is_request and friend.status == "REJECTED" %}
+                                    <span class="badge bg-danger">{% translate "Convite recusado" %}</span>
+                                {% elif not friend.is_request and friend.status == "REJECTED" %}
+                                    <span class="badge bg-warning text-dark">{% translate "Você recusou a amizade" %}</span>
+                                {% elif friend.is_request and friend.status == "PENDING" %}
+                                    <span class="badge bg-warning text-dark">{% translate "Convite pendente" %}</span>
+                                {% else %}
+                                    <a href="{% url 'remove_friend' friend.id %}" class="btn btn-danger">
+                                        <i class="bi bi-trash3"></i>
+                                    </a>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="text-muted">{% translate "Você ainda não tem amigos adicionados." %}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const userIdInput = document.getElementById("user-id-input");
+    const searchUserInput = document.getElementById("search-user");
+    const userDropdown = document.getElementById("user-dropdown");
+    const addFriendButton = document.getElementById("add-friend-button");
+    
+    function escapeHTML(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    function handleUserClick(id, username) {
+        searchUserInput.value = username;
+        userIdInput.value = id;
+        userDropdown.style.display = "none";
+        addFriendButton.disabled = false;
+    }
+
+    function createItem(user) {
+        const item = document.createElement("div");
+        item.className = "dropdown-item d-flex align-items-center";
+        item.innerHTML = `
+            <img src="${escapeHTML(user.avatar)}" alt="{% translate "Avatar" %}" class="rounded-circle me-2" style="width: 40px; height: 40px; object-fit: cover;">
+            <div>
+                <strong>${escapeHTML(user.username)}</strong><br>
+                <small class="text-muted">${escapeHTML(user.email)}</small>
+            </div>
+        `;
+        item.addEventListener("click", () => handleUserClick(user.id, user.username));
+        userDropdown.appendChild(item);
+    }
+
+    searchUserInput.addEventListener("input", function() {
+        const query = searchUserInput.value.trim();
+        addFriendButton.disabled = true;
+        if (query.length > 2) {
+            fetch(`{% url 'search_user' %}?q=${encodeURIComponent(query)}`)
+                .then(response => response.json())
+                .then(data => {
+                    userDropdown.innerHTML = "";
+                    userDropdown.style.display = "block";
+
+                    if (data.length === 0) {
+                        userDropdown.innerHTML = `<div class="dropdown-item text-muted">{% translate "Nenhum usuário encontrado" %}</div>`;
+                        return;
+                    }
+
+                    data.forEach(createItem);
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar usuários:', error);
+                    userDropdown.innerHTML = `<div class="dropdown-item text-muted">{% translate "Erro ao buscar usuários" %}</div>`;
+                });
+        } else {
+            userDropdown.style.display = "none";
+        }
+    });
+
+    document.addEventListener("click", function(event) {
+        if (!searchUserInput.contains(event.target) && !userDropdown.contains(event.target)) {
+            userDropdown.style.display = "none";
+        }
+    });
+});
+</script>
+{% endblock %}

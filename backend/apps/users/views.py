@@ -1,9 +1,12 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import auth
+from django.http import JsonResponse
 from apps.users.forms import UserLoginForm, UserCreationForm, UserEditProfileForm, ChatForm
+from apps.users.models import User, Friendship, FriendshipStatus
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
+from django.db.models import Q
 
 @login_required
 def home(request):
@@ -85,3 +88,128 @@ def chat(request):
             return redirect("chat")
 
     return render(request, "users/chat.html", { "form": form })
+
+@login_required
+def profile(request):
+    friends = Friendship.objects.filter(
+        Q(user1=request.user) | Q(user2=request.user)
+    )
+    
+    friends = [{
+        "id": friend.user1.id if friend.user1 != request.user else friend.user2.id,
+        "username": friend.user1.username if friend.user1 != request.user else friend.user2.username,
+        "avatar": friend.user1.avatar.url if friend.user1 != request.user else friend.user2.avatar.url,
+        "is_request": friend.requestd_by == request.user,
+        "status": friend.status,
+    } for friend in friends]
+    print(friends)
+    return render(request, "users/profile.html", { "friends": friends })
+
+@login_required
+def add_friend(request):
+    friend_id = request.POST.get("friend_id")
+    friend = User.objects.get(id=friend_id)
+    
+    if friend == request.user:
+        messages.error(request, _("Você não pode adicionar a si mesmo como amigo!"))
+        return redirect("profile")
+    
+    if friend == None:
+        messages.error(request, _("Usuário não encontrado!"))
+        return redirect("profile")
+    
+    Friendship(
+        user1=request.user,
+        user2=friend,
+        requestd_by=request.user,
+    ).save()
+    messages.success(request, _("Solicitação de amizade enviada com sucesso!"))
+    return redirect("profile")
+
+@login_required
+def remove_friend(request, friend_id):
+    friend = User.objects.get(id=friend_id)
+    if friend == None:
+        messages.error(request, _("Usuário não encontrado!"))
+        return redirect("profile")
+    
+    friendship = Friendship.objects.filter(
+        Q(user1=request.user, user2=friend) | Q(user1=friend, user2=request.user)
+    ).first()
+    
+    if friendship == None:
+        messages.error(request, _("Amigo não encontrado!"))
+        return redirect("profile")
+    
+    friendship.delete()
+    messages.success(request, _("Amigo removido com sucesso!"))
+    return redirect("profile")
+
+@login_required
+def search_user(request):
+    query = request.GET.get("q", "").strip()
+    if query:
+        friendships = Friendship.objects.filter(
+            Q(user1=request.user) | Q(user2=request.user)
+        )
+        already_friends = [friend.user1.id if friend.user1 != request.user else friend.user2.id for friend in friendships]
+        
+        users = User.objects.filter(
+            Q(email__icontains=query) | Q(username__icontains=query)
+        ).exclude(id=request.user.id).exclude(id__in=already_friends ).distinct()[:10]
+
+        users_data = [{
+            "id": user.id,
+            "email": user.email,
+            "username": user.username,
+            "avatar": user.avatar.url,
+        } for user in users]
+        return JsonResponse(users_data, safe=False)
+    
+    return JsonResponse([], safe=False)
+
+@login_required
+def accept_friend(request, friend_id):
+    friend = User.objects.get(id=friend_id)
+    if friend == None:
+        messages.error(request, _("Usuário não encontrado!"))
+        return redirect("profile")
+    
+    friendship = Friendship.objects.filter(
+        Q(user1=request.user, user2=friend) | Q(user1=friend, user2=request.user)
+    ).first()
+    
+    if friendship == None:
+        messages.error(request, _("Amigo não encontrado!"))
+        return redirect("profile")
+    
+    friendship.status = FriendshipStatus.ACCEPTED
+    friendship.save()
+    messages.success(request, _("Amigo aceito com sucesso!"))
+    return redirect("profile")
+
+@login_required
+def reject_friend(request, friend_id):
+    friend = User.objects.get(id=friend_id)
+    if friend == None:
+        messages.error(request, _("Usuário não encontrado!"))
+        return redirect("profile")
+    
+    friendship = Friendship.objects.filter(
+        Q(user1=request.user, user2=friend) | Q(user1=friend, user2=request.user)
+    ).first()
+    
+    if friendship == None:
+        messages.error(request, _("Amigo não encontrado!"))
+        return redirect("profile")
+    
+    friendship.status = FriendshipStatus.REJECTED
+    friendship.save()
+    messages.success(request, _("Amigo rejeitado com sucesso!"))
+    return redirect("profile")
+
+@login_required
+def friend_profile(request, friend_id):
+    friend = get_object_or_404(User, id=friend_id)
+    
+    return render(request, "users/friend.html", { "friend": friend })
