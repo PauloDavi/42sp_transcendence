@@ -6,20 +6,20 @@
     <div class="container col-12 col-md-4">
         <div class="card text-center">
             <div class="card-header">
-                <h4>{% translate "Perfil do Usuário" %} - {{ user.username }}</h4>
+                <h4>{% translate "Perfil do Usuário" %} - {{ friend.username }}</h4>
             </div>
             <div class="card-body">
-                <img src="{{ user.avatar.url }}" alt="Avatar" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
-                <h5 class="card-title">{{ user.email }}</h5>
+                <img src="{{ friend.avatar.url }}" alt="Avatar" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                <h5 class="card-title">{{ friend.email }}</h5>
                 <p class="card-text">
-                    <span class="badge bg-{% if user.status_online %}success{% else %}secondary{% endif %}">
-                        {% if user.status_online %}{% translate "Online" %}{% else %}{% translate "Offline" %}{% endif %}
+                    <span class="badge bg-{% if friend.status_online %}success{% else %}secondary{% endif %}">
+                        {% if friend.status_online %}{% translate "Online" %}{% else %}{% translate "Offline" %}{% endif %}
                     </span>
                 </p>
-                <p class="card-text">{% translate "Vitórias" %}: <strong>{{ user.wins }}</strong></p>
-                <p class="card-text">{% translate "Derrotas" %}: <strong>{{ user.losses }}</strong></p>
-                <p class="text-muted">{% translate "Criado em" %}: {{ user.created_at|date:"d/m/Y H:i" }}</p>
-                <p class="text-muted">{% translate "Atualizado em" %}: {{ user.updated_at|date:"d/m/Y H:i" }}</p>
+                <p class="card-text">{% translate "Vitórias" %}: <strong>{{ friend.wins }}</strong></p>
+                <p class="card-text">{% translate "Derrotas" %}: <strong>{{ friend.losses }}</strong></p>
+                <p class="text-muted">{% translate "Criado em" %}: {{ friend.created_at|date:"d/m/Y H:i" }}</p>
+                <p class="text-muted">{% translate "Atualizado em" %}: {{ friend.updated_at|date:"d/m/Y H:i" }}</p>
             </div>
         </div>
     </div>

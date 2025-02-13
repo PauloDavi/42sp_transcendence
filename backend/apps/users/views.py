@@ -210,6 +210,6 @@ def reject_friend(request, friend_id):
 
 @login_required
 def friend_profile(request, friend_id):
-    user = get_object_or_404(User, id=friend_id)
+    friend = get_object_or_404(User, id=friend_id)
     
-    return render(request, "users/friend.html", { "user": user })
+    return render(request, "users/friend.html", { "friend": friend })
