@@ -10,9 +10,10 @@
       </ul>
 
       <div class="dropdown text-end">
-        <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+        <button class="btn btn-outline-secondary d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
           <img src="{{ user.avatar.url }}" alt="{% translate "Foto do usuário" %}" width="32" height="32" class="rounded-circle">
-        </a>
+          <span class="d-none d-sm-inline ms-1">{{ user.username }}</span>
+        </button>
         <ul class="dropdown-menu text-small">
           <li><a href="{% url 'profile' %}" class="dropdown-item">{% translate "Perfil" %}</a></li>
           <li class="dropdown">
@@ -62,6 +63,9 @@
             </ul>
           </li>
           <li><hr class="dropdown-divider"></li>
+          {% if user.is_superuser %}
+            <li><a href="/rosetta" class="dropdown-item">Rosetta</a></li>
+          {% endif %}
           <li><a href="{% url 'logout' %}" class="dropdown-item">{% translate "Logout" %}</a></li>
         </ul>
       </div>

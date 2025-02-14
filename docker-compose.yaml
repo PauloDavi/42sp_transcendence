@@ -34,7 +34,6 @@ services:
       - db
     networks:
       - backend_network
-    user: "1000:1000"
 
 networks:
   backend_network:

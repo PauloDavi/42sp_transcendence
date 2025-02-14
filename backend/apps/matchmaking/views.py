@@ -1,0 +1,34 @@
+from django.shortcuts import redirect
+from django.contrib import messages
+from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.decorators import login_required
+from apps.users.models import User
+from apps.matchmaking.models import Match
+
+@login_required
+def create_match(request, opponent_id):
+  next_url = request.GET.get('next', '/')
+  opponent = User.objects.get(id=opponent_id)
+  
+  if opponent is None:
+    messages.error(request, _("Opponent not found"))
+    return redirect(next_url)
+  
+  if opponent == request.user:
+    messages.error(request, _("You can't play against yourself"))
+    return redirect(next_url)
+  
+  if opponent.status_online == False:
+    messages.error(request, _("Opponent is offline"))
+    return redirect(next_url)
+  
+  Match(
+    user1=request.user,
+    user2=opponent,
+    winner=request.user,
+    score_user1=1,
+    score_user2=0,
+  ).save()
+  
+  messages.success(request, _("Match created successfully"))
+  return redirect(next_url)
