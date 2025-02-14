@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "channels",
     
     "apps.users.apps.UsersConfig",
+    "apps.matchmaking.apps.MatchmakingConfig",
 ]
 MIDDLEWARE = [
     "django.middleware.locale.LocaleMiddleware",

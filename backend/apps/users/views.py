@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import auth
+from django.core.paginator import Paginator
 from django.http import JsonResponse
 from apps.users.forms import UserLoginForm, UserCreationForm, UserEditProfileForm, ChatForm
 from apps.users.models import User, Friendship, FriendshipStatus
+from apps.matchmaking.models import Match
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import gettext_lazy as _
@@ -100,10 +102,34 @@ def profile(request):
         "username": friend.user1.username if friend.user1 != request.user else friend.user2.username,
         "avatar": friend.user1.avatar.url if friend.user1 != request.user else friend.user2.avatar.url,
         "is_request": friend.requestd_by == request.user,
+        "status_online": friend.user1.status_online if friend.user1 != request.user else friend.user2.status_online,
         "status": friend.status,
     } for friend in friends]
-    print(friends)
-    return render(request, "users/profile.html", { "friends": friends })
+    
+    matches = Match.objects.filter(
+        Q(user1=request.user) | Q(user2=request.user)
+    ).order_by('started_date_played')
+    
+    match_filter = request.GET.get("match_filter", "")
+    if match_filter == "wins":
+        matches = matches.filter(winner=request.user)
+    elif match_filter == "losses":
+        matches = matches.exclude(winner=request.user)
+    
+    matches = [{
+        "id": match.id,
+        "opponent": match.user1 if match.user1 != request.user else match.user2,
+        "points": match.score_user1 if match.user1 == request.user else match.score_user2,
+        "opponent_points": match.score_user1 if match.user1 != request.user else match.score_user2,
+        "started_date_played": match.started_date_played,
+        "finished_date_played": match.finished_date_played,
+    } for match in matches]
+    
+    paginator = Paginator(matches, 5)
+    page_number = request.GET.get("page")
+    matches = paginator.get_page(page_number)
+    
+    return render(request, "users/profile.html", { "friends": friends, "matches": matches })
 
 @login_required
 def add_friend(request):

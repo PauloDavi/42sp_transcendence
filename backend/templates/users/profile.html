@@ -26,52 +26,130 @@
     </div>
 
     <div class="justify-content-center col-12 col-md-8 mt-4 mt-md-0">
-        <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h4 class="me-2">{% translate "Amigos" %}</h4>
-                <form class="d-flex" method="post" action="{% url 'add_friend' %}">
-                    {% csrf_token %}
-                    <div class="position-relative">
-                        <input type="hidden" id="user-id-input" name="friend_id">
-                        <input class="form-control" type="text" id="search-user" name="friend_email" placeholder="{% translate "Buscar usuário..." %}" autocomplete="off">
-                        <div id="user-dropdown" class="dropdown-menu w-100 shadow" style="display: none; max-height: 250px; overflow-y: auto;"></div>
-                    </div>
-                    
-                    <button id="add-friend-button" disabled class="btn btn-outline-success ms-2" type="submit">
-                        <i class="bi bi-person-add"></i>
-                    </button>
-                </form>
-            </div>
-            <div class="card-body">
-                {% if friends %}
-                    <ul class="list-group">
-                        {% for friend in friends %}
-                            <li class="list-group-item d-flex align-items-center">
-                                <img src="{{ friend.avatar }}" alt="{% translate "Avatar" %}" class="rounded-circle me-3" style="width: 50px; height: 50px; object-fit: cover;">
-                                <div class="flex-grow-1">
-                                    <a href="{% url 'friend_profile' friend.id %}"><strong>{{ friend.username }}</strong></a>
-                                </div>
-                                {% if not friend.is_request and friend.status == "PENDING" %}
-                                    <div class="d-flex flex-md-row flex-column gap-2">
-                                        <a href="{% url 'accept_friend' friend.id %}" class="btn btn-success text-light text-decoration-none ">{% translate "Aceitar convite" %}</a>
-                                        <a href="{% url 'reject_friend' friend.id %}" class="btn btn-danger text-light text-decoration-none">{% translate "Recusar convite" %}</a>
+        <div class="row gap-3 px-2 px-md-0">
+            <div class="card col-12 p-0">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="me-2">{% translate "Amigos" %}</h4>
+                    <form class="d-flex" method="post" action="{% url 'add_friend' %}">
+                        {% csrf_token %}
+                        <div class="position-relative">
+                            <input type="hidden" id="user-id-input" name="friend_id">
+                            <input class="form-control" type="text" id="search-user" name="friend_email" placeholder="{% translate "Buscar usuário..." %}" autocomplete="off">
+                            <div id="user-dropdown" class="dropdown-menu w-100 shadow" style="display: none; max-height: 250px; overflow-y: auto;"></div>
+                        </div>
+                        
+                        <button id="add-friend-button" disabled class="btn btn-outline-success ms-2" type="submit">
+                            <i class="bi bi-person-add"></i>
+                        </button>
+                    </form>
+                </div>
+                <div class="card-body">
+                    {% if friends %}
+                        <ul class="list-group">
+                            {% for friend in friends %}
+                                <li class="list-group-item d-flex align-items-center">
+                                    <div class="position-relative">
+                                        <img src="{{ friend.avatar }}" alt="{% translate "Avatar" %}" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;"/>
+                                        <span class="{% if friend.status_online %} bg-success {% else %} bg-danger {% endif %} position-absolute top-0 rounded-circle" style="left: 35px; padding: 0.4rem;" />
                                     </div>
-                                {% elif friend.is_request and friend.status == "REJECTED" %}
-                                    <span class="badge bg-danger">{% translate "Convite recusado" %}</span>
-                                {% elif not friend.is_request and friend.status == "REJECTED" %}
-                                    <span class="badge bg-warning text-dark">{% translate "Você recusou a amizade" %}</span>
-                                {% elif friend.is_request and friend.status == "PENDING" %}
-                                    <span class="badge bg-warning text-dark">{% translate "Convite pendente" %}</span>
-                                {% else %}
-                                    <a href="{% url 'remove_friend' friend.id %}" class="btn btn-danger">
-                                        <i class="bi bi-trash3"></i>
-                                    </a>
-                                {% endif %}
+                                    <div class="flex-grow-1 ms-3">
+                                        <a href="{% url 'friend_profile' friend.id %}"><strong>{{ friend.username }}</strong></a>
+                                    </div>
+                                    {% if not friend.is_request and friend.status == "PENDING" %}
+                                        <div class="d-flex flex-md-row flex-column gap-2">
+                                            <a href="{% url 'accept_friend' friend.id %}" class="btn btn-success text-light text-decoration-none ">{% translate "Aceitar convite" %}</a>
+                                            <a href="{% url 'reject_friend' friend.id %}" class="btn btn-danger text-light text-decoration-none">{% translate "Recusar convite" %}</a>
+                                        </div>
+                                    {% elif friend.is_request and friend.status == "REJECTED" %}
+                                        <span class="badge bg-danger">{% translate "Convite recusado" %}</span>
+                                    {% elif not friend.is_request and friend.status == "REJECTED" %}
+                                        <span class="badge bg-warning text-dark">{% translate "Você recusou a amizade" %}</span>
+                                    {% elif friend.is_request and friend.status == "PENDING" %}
+                                        <span class="badge bg-warning text-dark">{% translate "Convite pendente" %}</span>
+                                    {% else %}
+                                        <div class="d-flex gap-2">
+                                            <a href="{% url 'add_match' friend.id %}?next={{ request.get_full_path }}" class="btn btn-primary">
+                                                <i class="bi bi-play"></i>
+                                            </a>
+                                            <a href="{% url 'remove_friend' friend.id %}" class="btn btn-danger">
+                                                <i class="bi bi-trash3"></i>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted">{% translate "Você ainda não tem amigos adicionados." %}</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="card col-12 p-0">
+                <div class="card-header align-items-center d-flex">
+                    <h4 class="flex-grow-1">{% translate "Partidas" %}</h4>
+
+                    <div class="d-flex gap-2 flex-column flex-sm-row">
+                        <a href="?match_filter=wins" class="btn btn-success btn-sm">{% translate "Vitórias" %}</a>
+                        <a href="?match_filter=losses" class="btn btn-danger btn-sm">{% translate "Derrotas" %}</a>
+                        <a href="?" class="btn btn-secondary btn-sm">{% translate "Todas" %}</a>
+                    </div>
+                </div>
+                {% if matches %}
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>{% translate "Oponente" %}</th>
+                                        <th style="min-width: 85px;">{% translate "Placar" %}</th>
+                                        <th style="min-width: 175px;">{% translate "Início" %}</th>
+                                        <th style="min-width: 175px;">{% translate "Fim" %}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for match in matches %}
+                                        <tr>
+                                            <td><a href="{% url 'friend_profile' match.opponent.id %}">{{ match.opponent.username }}</a></td>
+                                            <td><span class="badge bg-success">{{ match.points }}</span> x <span class="badge bg-danger">{{ match.opponent_points }}</span></td>
+                                            <td>{{ match.started_date_played|date:"d/m/Y H:i" }}</td>
+                                            <td>{{ match.finished_date_played|date:"d/m/Y H:i" }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <nav>
+                        <ul class="pagination justify-content-center">
+                            {% if matches.has_previous %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page=1{% if request.GET.filter %}&filter={{ request.GET.filter }}{% endif %}">&laquo; <span class="d-none d-sm-inline">Primeira</span></a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ matches.previous_page_number }}{% if request.GET.filter %}&filter={{ request.GET.filter }}{% endif %}">&lsaquo; <span class="d-none d-sm-inline">Anterior</span></a>
+                                </li>
+                            {% endif %}
+            
+                            <li class="page-item active">
+                                <span class="page-link">Página {{ matches.number }} de {{ matches.paginator.num_pages }}</span>
                             </li>
-                        {% endfor %}
-                    </ul>
+            
+                            {% if matches.has_next %}
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ matches.next_page_number }}{% if request.GET.filter %}&filter={{ request.GET.filter }}{% endif %}"><span class="d-none d-sm-inline">Próxima</span> &rsaquo;</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="?page={{ matches.paginator.num_pages }}{% if request.GET.filter %}&filter={{ request.GET.filter }}{% endif %}"><span class="d-none d-sm-inline">Última</span> &raquo;</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                    </nav>
                 {% else %}
-                    <p class="text-muted">{% translate "Você ainda não tem amigos adicionados." %}</p>
+                    <div class="card-body">
+                        <p class="text-muted">{% translate "Você ainda não jogou nenhuma partida." %}</p>
+                    </div>
                 {% endif %}
             </div>
         </div>
