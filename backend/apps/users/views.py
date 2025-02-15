@@ -108,7 +108,7 @@ def profile(request):
     
     matches = Match.objects.filter(
         Q(user1=request.user) | Q(user2=request.user)
-    ).order_by('started_date_played')
+    ).order_by("started_date_played")
     
     match_filter = request.GET.get("match_filter", "")
     if match_filter == "wins":

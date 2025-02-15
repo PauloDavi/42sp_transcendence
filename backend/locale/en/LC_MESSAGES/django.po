@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-14 08:24-0300\n"
-"PO-Revision-Date: 2025-02-14 09:02-0300\n"
+"POT-Creation-Date: 2025-02-15 00:41-0300\n"
+"PO-Revision-Date: 2025-02-15 00:42-0300\n"
 "Last-Translator:   <super@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -20,22 +20,18 @@ msgstr ""
 "X-Translated-Using: django-rosetta 0.10.1\n"
 
 #: apps/matchmaking/models.py:11
-#| msgid "Foto do usuário"
 msgid "Pontuação do usuário 1"
 msgstr "User Score 1"
 
 #: apps/matchmaking/models.py:12
-#| msgid "Foto do usuário"
 msgid "Pontuação do usuário 2"
 msgstr "User Score 2"
 
 #: apps/matchmaking/models.py:13
-#| msgid "Criado em"
 msgid "Jogado em"
 msgstr "Played in"
 
 #: apps/matchmaking/models.py:14
-#| msgid "Atualizado em"
 msgid "Finalizado em"
 msgstr "Completed on"
 
@@ -119,17 +115,17 @@ msgid "Sua mensagem..."
 msgstr "Your message"
 
 #: apps/users/models.py:14 templates/users/profile.html:52
-#: templates/users/profile.html:157
+#: templates/users/profile.html:185
 msgid "Avatar"
 msgstr "Avatar"
 
 #: apps/users/models.py:19 templates/users/friend.html:19
-#: templates/users/profile.html:19 templates/users/profile.html:92
+#: templates/users/profile.html:19 templates/users/profile.html:93
 msgid "Vitórias"
 msgstr "Victories"
 
 #: apps/users/models.py:20 templates/users/friend.html:20
-#: templates/users/profile.html:20 templates/users/profile.html:93
+#: templates/users/profile.html:20 templates/users/profile.html:94
 msgid "Derrotas"
 msgstr "Defeats"
 
@@ -170,68 +166,68 @@ msgstr "Friendship"
 msgid "Amizades"
 msgstr "Friendships"
 
-#: apps/users/views.py:35
+#: apps/users/views.py:36
 msgid "Login realizado com sucesso"
 msgstr "Login successful"
 
-#: apps/users/views.py:38
+#: apps/users/views.py:39
 msgid "Usuário ou senha inválidos"
 msgstr "Invalid username or password"
 
-#: apps/users/views.py:44
+#: apps/users/views.py:45
 msgid "Usuário deslogado com sucesso"
 msgstr "User successfully logged out"
 
-#: apps/users/views.py:58
+#: apps/users/views.py:59
 msgid "Usuário criado com sucesso"
 msgstr "User created successfully"
 
-#: apps/users/views.py:69
+#: apps/users/views.py:70
 msgid "Seu perfil foi atualizado com sucesso!"
 msgstr "Your profile has been updated successfully!"
 
-#: apps/users/views.py:88
+#: apps/users/views.py:89
 msgid "Mensagem enviada com sucesso!"
 msgstr "Message sent successfully!"
 
-#: apps/users/views.py:135
+#: apps/users/views.py:140
 msgid "Você não pode adicionar a si mesmo como amigo!"
 msgstr "You can't add yourself as a friend!"
 
-#: apps/users/views.py:139 apps/users/views.py:154 apps/users/views.py:196
-#: apps/users/views.py:216
+#: apps/users/views.py:144 apps/users/views.py:159 apps/users/views.py:201
+#: apps/users/views.py:221
 msgid "Usuário não encontrado!"
 msgstr "User not found!"
 
-#: apps/users/views.py:147
+#: apps/users/views.py:152
 msgid "Solicitação de amizade enviada com sucesso!"
 msgstr "Friend request sent successfully!"
 
-#: apps/users/views.py:162 apps/users/views.py:204 apps/users/views.py:224
+#: apps/users/views.py:167 apps/users/views.py:209 apps/users/views.py:229
 msgid "Amigo não encontrado!"
 msgstr "Friend not found!"
 
-#: apps/users/views.py:166
+#: apps/users/views.py:171
 msgid "Amigo removido com sucesso!"
 msgstr "Friend successfully removed!"
 
-#: apps/users/views.py:209
+#: apps/users/views.py:214
 msgid "Amigo aceito com sucesso!"
 msgstr "Friend accepted successfully!"
 
-#: apps/users/views.py:229
+#: apps/users/views.py:234
 msgid "Amigo rejeitado com sucesso!"
 msgstr "Friend rejected successfully!"
 
-#: setup/settings.py:103
+#: setup/settings.py:127
 msgid "Português"
 msgstr "Portuguese"
 
-#: setup/settings.py:104
+#: setup/settings.py:128
 msgid "Inglês"
 msgstr "English"
 
-#: setup/settings.py:105
+#: setup/settings.py:129
 msgid "Espanhol"
 msgstr "Spanish"
 
@@ -255,31 +251,31 @@ msgstr "Information"
 msgid "Foto do usuário"
 msgstr "User Photo"
 
-#: templates/shared/partials/_navbar.html:17
+#: templates/shared/partials/_navbar.html:18
 msgid "Perfil"
 msgstr "Profile"
 
-#: templates/shared/partials/_navbar.html:21
+#: templates/shared/partials/_navbar.html:22
 msgid "Tema"
 msgstr "Theme"
 
-#: templates/shared/partials/_navbar.html:26
+#: templates/shared/partials/_navbar.html:27
 msgid "Claro"
 msgstr "Light"
 
-#: templates/shared/partials/_navbar.html:31
+#: templates/shared/partials/_navbar.html:32
 msgid "Escuro"
 msgstr "Dark"
 
-#: templates/shared/partials/_navbar.html:36
+#: templates/shared/partials/_navbar.html:37
 msgid "Automático"
 msgstr "Automatic"
 
-#: templates/shared/partials/_navbar.html:44
+#: templates/shared/partials/_navbar.html:45
 msgid "Lingua"
 msgstr "Language"
 
-#: templates/shared/partials/_navbar.html:65
+#: templates/shared/partials/_navbar.html:70
 msgid "Logout"
 msgstr "Logout"
 
@@ -307,17 +303,25 @@ msgstr "Offline"
 msgid "Bem-vindo ao meu site!"
 msgstr "Welcome to my website!"
 
-#: templates/users/login.html:7 templates/users/register.html:25
+#: templates/users/login.html:8 templates/users/register.html:25
 msgid "Login"
 msgstr "Login"
 
-#: templates/users/login.html:24
+#: templates/users/login.html:25
 msgid "Logar"
 msgstr "Login"
 
-#: templates/users/login.html:25 templates/users/register.html:24
+#: templates/users/login.html:29
+msgid "Login com 42"
+msgstr "Enter with 42"
+
+#: templates/users/login.html:31 templates/users/register.html:24
 msgid "Cadastrar"
 msgstr "Register"
+
+#: templates/users/login.html:41
+msgid "Autenticando"
+msgstr "Authenticating"
 
 #: templates/users/profile.html:23
 msgid "Editar Perfil"
@@ -355,36 +359,35 @@ msgstr "Invitation pending"
 msgid "Você ainda não tem amigos adicionados."
 msgstr "You have no friends added yet."
 
-#: templates/users/profile.html:94
+#: templates/users/profile.html:95
 msgid "Todas"
 msgstr "All"
 
-#: templates/users/profile.html:102
+#: templates/users/profile.html:104
 msgid "Oponente"
 msgstr "Opponent"
 
-#: templates/users/profile.html:103
+#: templates/users/profile.html:105
 msgid "Placar"
 msgstr "Scoreboard"
 
-#: templates/users/profile.html:104
+#: templates/users/profile.html:106
 msgid "Início"
 msgstr "Start"
 
-#: templates/users/profile.html:105
+#: templates/users/profile.html:107
 msgid "Fim"
 msgstr "End"
 
-#: templates/users/profile.html:123
-#| msgid "Você ainda não tem amigos adicionados."
+#: templates/users/profile.html:151
 msgid "Você ainda não jogou nenhuma partida."
 msgstr "You haven't played any matches yet."
 
-#: templates/users/profile.html:178
+#: templates/users/profile.html:206
 msgid "Nenhum usuário encontrado"
 msgstr "No users found"
 
-#: templates/users/profile.html:186
+#: templates/users/profile.html:214
 msgid "Erro ao buscar usuários"
 msgstr "Error searching for users"
 

@@ -7,7 +7,7 @@ from apps.matchmaking.models import Match
 
 @login_required
 def create_match(request, opponent_id):
-  next_url = request.GET.get('next', '/')
+  next_url = request.GET.get("next", "/")
   opponent = User.objects.get(id=opponent_id)
   
   if opponent is None:

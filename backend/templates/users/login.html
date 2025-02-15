@@ -1,6 +1,7 @@
 {% extends 'shared/base.html' %}
 {% load static %}
 {% load i18n %}
+{% load socialaccount %}
 {% block content %}
 <div class="container vh-100 d-flex flex-column justify-content-center">
   <div class="mx-auto container-sm bg-body-secondary p-4 rounded-3">
@@ -22,9 +23,23 @@
         </div>
         {% endfor %}
         <button type="submit" class="btn btn-primary mt-3 w-100">{% translate "Logar" %}</button>
-        <a href="{% url 'register' %}" class="btn btn-secondary mt-3 w-100">{% translate "Cadastrar" %}</a>
-      </div>
-    </form>
+      </form>
+      <form action="{% provider_login_url 'fortytwo' %}" method="post" id="oauthLoginForm">
+        {% csrf_token %}
+        <button id="loginButton" type="submit" class="btn btn-primary mt-3 w-100">{% translate "Login com 42" %}</button>
+      </form>
+      <a href="{% url 'register' %}" class="btn btn-secondary mt-3 w-100">{% translate "Cadastrar" %}</a>
+    </div>
   </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.getElementById('oauthLoginForm').addEventListener('submit', function (event) {
+      var button = document.getElementById('loginButton');
+      button.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> {% translate "Autenticando" %}...';
+      button.disabled = true;
+  });
+</script>
 {% endblock %}
