@@ -15,6 +15,7 @@ SITE_ID = 1
 
 # Application definition
 INSTALLED_APPS = [
+    "daphne",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -23,8 +24,10 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     
     "rosetta",
+    "channels",
     
     "apps.users.apps.UsersConfig",
+    "apps.matchmaking.apps.MatchmakingConfig",
 ]
 MIDDLEWARE = [
     "django.middleware.locale.LocaleMiddleware",
@@ -52,7 +55,12 @@ TEMPLATES = [
         },
     },
 ]
-WSGI_APPLICATION = "setup.wsgi.application"
+ASGI_APPLICATION = "setup.asgi.application"
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
