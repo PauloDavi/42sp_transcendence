@@ -24,12 +24,22 @@
         {% endfor %}
         <button type="submit" class="btn btn-primary mt-3 w-100">{% translate "Logar" %}</button>
       </form>
-      <form action="{% provider_login_url 'fortytwo' %}" method="post">
+      <form action="{% provider_login_url 'fortytwo' %}" method="post" id="oauthLoginForm">
         {% csrf_token %}
-        <button type="submit" class="btn btn-primary mt-3 w-100">{% translate "Login com 42" %}</button>
+        <button id="loginButton" type="submit" class="btn btn-primary mt-3 w-100">{% translate "Login com 42" %}</button>
       </form>
       <a href="{% url 'register' %}" class="btn btn-secondary mt-3 w-100">{% translate "Cadastrar" %}</a>
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.getElementById('oauthLoginForm').addEventListener('submit', function (event) {
+      var button = document.getElementById('loginButton');
+      button.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> {% translate "Autenticando" %}...';
+      button.disabled = true;
+  });
+</script>
 {% endblock %}

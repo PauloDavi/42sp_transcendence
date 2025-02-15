@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-14 23:43-0300\n"
-"PO-Revision-Date: 2025-02-14 23:29-0300\n"
+"POT-Creation-Date: 2025-02-15 00:41-0300\n"
+"PO-Revision-Date: 2025-02-15 00:42-0300\n"
 "Last-Translator:   <super@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -275,7 +275,7 @@ msgstr "Automático"
 msgid "Lingua"
 msgstr "Língua"
 
-#: templates/shared/partials/_navbar.html:69
+#: templates/shared/partials/_navbar.html:70
 msgid "Logout"
 msgstr "Logout"
 
@@ -318,6 +318,10 @@ msgstr "Login com 42"
 #: templates/users/login.html:31 templates/users/register.html:24
 msgid "Cadastrar"
 msgstr "Cadastrar"
+
+#: templates/users/login.html:41
+msgid "Autenticando"
+msgstr "Autenticando"
 
 #: templates/users/profile.html:23
 msgid "Editar Perfil"
