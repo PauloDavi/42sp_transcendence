@@ -1,5 +1,6 @@
 from django.apps import AppConfig
 
-class MatchmakingConfig(AppConfig):
+
+class ChatConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "apps.matchmaking"
+    name = "apps.chat"

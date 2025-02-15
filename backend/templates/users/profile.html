@@ -11,11 +11,6 @@
             <div class="card-body">
                 <img src="{{ user.avatar.url }}" alt="Avatar" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
                 <h5 class="card-title">{{ user.email }}</h5>
-                <p class="card-text">
-                    <span class="badge bg-{% if user.status_online %}success{% else %}secondary{% endif %}">
-                        {% if user.status_online %}{% translate "Online" %}{% else %}{% translate "Offline" %}{% endif %}
-                    </span>
-                </p>
                 <p class="card-text">{% translate "Vitórias" %}: <strong>{{ user.wins }}</strong></p>
                 <p class="card-text">{% translate "Derrotas" %}: <strong>{{ user.losses }}</strong></p>
                 <p class="text-muted">{% translate "Criado em" %}: {{ user.created_at|date:"d/m/Y H:i" }}</p>

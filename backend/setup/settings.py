@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     
     "apps.users.apps.UsersConfig",
     "apps.matchmaking.apps.MatchmakingConfig",
+    "apps.chat.apps.ChatConfig",
 ]
 MIDDLEWARE = [
     "django.middleware.locale.LocaleMiddleware",
