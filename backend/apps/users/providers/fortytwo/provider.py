@@ -30,6 +30,7 @@ class FortyTwoProvider(OAuth2Provider):
         )
 
     def extract_extra_data(self, data):
+        data["avatar_url"] = data.get("image", {}).get("link", "")
         return data
 
     def extract_email_addresses(self, data):

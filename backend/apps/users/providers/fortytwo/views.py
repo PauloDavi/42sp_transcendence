@@ -17,7 +17,7 @@ class FortyTwoOAuth2Adapter(OAuth2Adapter):
     
     def get_callback_url(self, request, app):
         base_url = super().get_callback_url(request, app)
-        if base_url.endswith('/'):
+        if base_url.endswith("/"):
             base_url = base_url[:-1]
         return base_url
 

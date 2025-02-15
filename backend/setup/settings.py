@@ -23,10 +23,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.oauth2',
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.oauth2",
     "apps.users.providers.fortytwo",
     
     "rosetta",
@@ -71,8 +71,8 @@ CHANNEL_LAYERS = {
 
 # Authentication
 AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
 )
 ACCOUNT_LOGIN_ON_SIGNUP = False
 LOGIN_REDIRECT_URL = "/"

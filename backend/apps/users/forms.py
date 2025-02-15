@@ -116,8 +116,8 @@ class UserEditProfileForm(forms.Form):
         return cleaned_data
 
 class ChatForm(forms.Form):
-    content = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'placeholder': _('Sua mensagem...')}))
+    content = forms.CharField(widget=forms.Textarea(attrs={"class": "form-control", "placeholder": _("Sua mensagem...")}))
     
     def save(self, sender, receiver=None, commit=True):
-        message = Messages(sender=sender, receiver=receiver, content=self.cleaned_data['content'])
+        message = Messages(sender=sender, receiver=receiver, content=self.cleaned_data["content"])
         message.save()
