@@ -11,6 +11,7 @@ urlpatterns = i18n_patterns(
     path("admin/", admin.site.urls),
     path("", include("apps.users.urls")),
     path("matchmaking/", include("apps.matchmaking.urls")),
+    path("chat/", include("apps.chat.urls")),
 ) + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 ) + [
