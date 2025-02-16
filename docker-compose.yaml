@@ -34,6 +34,12 @@ services:
       - DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD}
     depends_on:
       - db
+      - redis
+    networks:
+      - backend_network
+
+  redis:
+    image: redis:7
     networks:
       - backend_network
 

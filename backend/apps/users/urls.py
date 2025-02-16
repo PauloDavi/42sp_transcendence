@@ -1,11 +1,10 @@
 from django.urls import path
-from apps.users.views import home,  \
+from apps.users.views import home, \
     login, \
     logout, \
     register, \
     update_user, \
     search_user, \
-    chat, \
     profile, \
     add_friend, \
     remove_friend, \
@@ -27,6 +26,4 @@ urlpatterns = [
     path("user/accept_friend/<uuid:friend_id>", accept_friend, name="accept_friend"),
     path("user/reject_friend/<uuid:friend_id>", reject_friend, name="reject_friend"),
     path("user/search", search_user, name="search_user"),
-
-    path("chat", chat, name="chat"),
 ]

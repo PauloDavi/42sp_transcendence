@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import auth
 from django.core.paginator import Paginator
 from django.http import JsonResponse
-from apps.users.forms import UserLoginForm, UserCreationForm, UserEditProfileForm, ChatForm
+from apps.users.forms import UserLoginForm, UserCreationForm, UserEditProfileForm
 from apps.users.models import User, Friendship, FriendshipStatus
 from apps.matchmaking.models import Match
 from django.contrib import messages
@@ -80,18 +80,6 @@ def update_user(request):
     return render(request, "users/update_user.html", { "form": form })
 
 @login_required
-def chat(request):
-    form = ChatForm()
-    if request.method == "POST":
-        form = ChatForm(request.POST)
-        if form.is_valid():
-            form.save(sender=request.user, receiver=request.user)
-            messages.success(request, _("Mensagem enviada com sucesso!"))
-            return redirect("chat")
-
-    return render(request, "users/chat.html", { "form": form })
-
-@login_required
 def profile(request):
     friends = Friendship.objects.filter(
         Q(user1=request.user) | Q(user2=request.user)
@@ -108,13 +96,13 @@ def profile(request):
     
     matches = Match.objects.filter(
         Q(user1=request.user) | Q(user2=request.user)
-    ).order_by("started_date_played")
+    ).order_by("-started_date_played")
     
     match_filter = request.GET.get("match_filter", "")
     if match_filter == "wins":
-        matches = matches.filter(winner=request.user)
+        matches = matches.filter(winner=request.user).order_by("-started_date_played")
     elif match_filter == "losses":
-        matches = matches.exclude(winner=request.user)
+        matches = matches.exclude(winner=request.user).order_by("-started_date_played")
     
     matches = [{
         "id": match.id,
