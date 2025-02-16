@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-15 20:04-0300\n"
+"POT-Creation-Date: 2025-02-16 00:15-0300\n"
 "PO-Revision-Date: 2025-02-15 00:42-0300\n"
 "Last-Translator:   <super@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -291,10 +291,6 @@ msgstr "Online"
 msgid "Offline"
 msgstr "Offline"
 
-#: templates/users/home.html:5
-msgid "Bem-vindo ao meu site!"
-msgstr "Bem-vindo ao meu site!"
-
 #: templates/users/login.html:8 templates/users/register.html:25
 msgid "Login"
 msgstr "Login"
@@ -394,6 +390,9 @@ msgstr "Atualize seu perfil"
 #: templates/users/update_user.html:31
 msgid "Salvar"
 msgstr "Salvar"
+
+#~ msgid "Bem-vindo ao meu site!"
+#~ msgstr "Bem-vindo ao meu site!"
 
 #~ msgid "Sua mensagem..."
 #~ msgstr "Sua mensagem..."

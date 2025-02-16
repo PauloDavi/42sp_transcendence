@@ -1,5 +1,5 @@
 from django.urls import re_path
-from apps.matchmaking.consumers import OnlineStatusConsumer
+from apps.users.consumers import OnlineStatusConsumer
 from apps.chat.consumers import ChatConsumer
 
 websocket_urlpatterns = [
