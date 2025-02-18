@@ -2,7 +2,8 @@
 {% load static %}
 {% load i18n %}
 {% load socialaccount %}
-{% block content %}
+
+{% block styles %}
 <style>
   body {
     background: url('../../media/backgrounds/login.jpg') repeat center center fixed;
@@ -69,7 +70,9 @@
     box-shadow: 0 0 10px rgb(255, 255, 255);
   }
 </style>
+{% endblock %}
 
+{% block content %}
 <div class="container vh-100 d-flex flex-column justify-content-center align-items-center">
   <div class="login-container">
     <h1>{% translate "Login" %}</h1>
