@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-16 00:15-0300\n"
+"POT-Creation-Date: 2025-02-17 16:04-0300\n"
 "PO-Revision-Date: 2025-02-15 00:42-0300\n"
 "Last-Translator:   <super@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -291,23 +291,23 @@ msgstr "Online"
 msgid "Offline"
 msgstr "Offline"
 
-#: templates/users/login.html:8 templates/users/register.html:25
+#: templates/users/login.html:75 templates/users/register.html:79
 msgid "Login"
 msgstr "Login"
 
-#: templates/users/login.html:25
+#: templates/users/login.html:92
 msgid "Logar"
 msgstr "Entrar"
 
-#: templates/users/login.html:29
+#: templates/users/login.html:96
 msgid "Login com 42"
 msgstr "Login com 42"
 
-#: templates/users/login.html:31 templates/users/register.html:24
+#: templates/users/login.html:98 templates/users/register.html:78
 msgid "Cadastrar"
 msgstr "Cadastrar"
 
-#: templates/users/login.html:41
+#: templates/users/login.html:108
 msgid "Autenticando"
 msgstr "Autenticando"
 
@@ -379,7 +379,7 @@ msgstr "Nenhum usuário encontrado"
 msgid "Erro ao buscar usuários"
 msgstr "Erro ao buscar usuários"
 
-#: templates/users/register.html:7
+#: templates/users/register.html:61
 msgid "Cadastro"
 msgstr "Cadastro"
 
