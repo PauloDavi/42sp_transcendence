@@ -35,6 +35,10 @@ def create_match(request, opponent_id):
 def match_game(request, match_id):
   match = get_object_or_404(Match, id=match_id)
 
+  if match.finished_date_played:
+    messages.error(request, _("Match already finished"))
+    return redirect("/")
+
   if match.user1 != request.user and match.user2 != request.user:
     messages.error(request, _("You are not part of this match"))
     return redirect("/")

@@ -34,188 +34,59 @@ document.addEventListener("DOMContentLoaded", () => {
   const scoreboardCanvas = document.createElement("canvas");
   const scoreboardContext = scoreboardCanvas.getContext("2d");
 
-  const keys = {};
   let leftScore, rightScore;
-  let grid, paddleHeight, ballSize, paddleSpeed, maxPaddleY;
-  let leftPaddle, rightPaddle, ball, lastTime, gameOver, winner, startGame = false;
+  let grid, keysPressed = {}, lastKeysPressed = {}, gameStart = false, gameOver = false;
+  let leftPaddle, rightPaddle, ball;
 
   function initializeGame() {
     grid = canvas.width * 0.02;
-    paddleHeight = grid * 5;
-    ballSize = grid;
-    paddleSpeed = canvas.height * 0.6;
-    maxPaddleY = canvas.height - grid - paddleHeight;
-
-    lastTime = 0;
-    gameOver = false;
-    winner = "";
-
     leftScore = 0;
     rightScore = 0;
 
-    leftPaddle = createPaddle(grid * 2, canvas.height / 2 - paddleHeight / 2);
-    rightPaddle = createPaddle(
-      canvas.width - grid * 3,
-      canvas.height / 2 - paddleHeight / 2
-    );
-    ball = createBall(canvas.width / 2, canvas.height / 2);
+    leftPaddle = {};
+    rightPaddle = {};
+    ball = {};
 
     paddleHitSound.load();
     wallHitSound.load();
   }
 
-  function createPaddle(x, y) {
-    return { x: x, y: y, width: grid, height: paddleHeight, dy: 0 };
-  }
-
-  function createBall(x, y) {
-    return { x: x, y: y, width: ballSize, height: ballSize, dx: canvas.width * 0.4, dy: -canvas.width * 0.4, resetting: false };
-  }
-
-  function drawWidthHeight() {
-    let y = 0;
-    let x = 0;
-
-    context.font = "10px Arial";
-    context.textAlign = "center";
-    
-    for (let i = 0; i < 50; i++) {
-      context.fillStyle = `hsl(${Math.random() * 360}, 100%, 50%)`;
-      context.fillRect(x, y, grid, grid);
-      context.fillRect(x, canvas.height - grid, grid, grid);
-      context.fillStyle = "white";
-      context.fillText(i, x + grid / 2, y + grid * 0.75);
-      context.fillText(i, x + grid / 2, canvas.height - grid + y + grid * 0.75);
-      x += grid;
-    }
-
-    y = grid;
-    x = grid;
-
-    context.font = "10px Arial";
-    context.textAlign = "center";
-    
-    for (let i = 0; i < 23; i++) {
-      context.fillStyle = `hsl(${Math.random() * 360}, 100%, 50%)`;
-      context.fillRect(x, y, grid, grid);
-      context.fillStyle = "white";
-      context.fillText(i, x + grid / 2, y + grid * 0.75);
-      y += grid;
-    }
-  }
-
   function loop(timestamp) {
-    if (startGame) {
-      if (gameOver) return drawEndGameScreen();
-      
-      const deltaTime = (timestamp - lastTime) / 1000;
-      lastTime = timestamp;
-      
-      update(deltaTime);
-      draw();
-    }
+    if (gameOver || !gameStart) return;
+    draw();
+    verifyKeys();
     requestAnimationFrame(loop);
   }
 
-  function update(deltaTime) {
-    paddlesMovement(deltaTime);
+  function verifyKeys() {
+    if (keysPressed["KeyW"] && !lastKeysPressed["KeyW"]) {
+      socket.send(JSON.stringify({ type: "up", event: "keydown" }));
+    } else if (!keysPressed["KeyW"] && lastKeysPressed["KeyW"]) {
+      socket.send(JSON.stringify({ type: "up", event: "keyup" }));
+    }
     
-    {% if is_player1 %}
-    ballMovement(deltaTime);
-    if (collides(ball, leftPaddle)) updateBallWhenColideWithPaddle(leftPaddle, leftPaddle.x + leftPaddle.width);
-    else if (collides(ball, rightPaddle)) updateBallWhenColideWithPaddle(rightPaddle, rightPaddle.x - ball.width);
-    updateBall(ball.x, ball.y);
-    {% endif %}
-  }
-
-  function updateBallWhenColideWithPaddle(paddle, newBallX) {
-    let impactPoint = ball.y + ball.height / 2 - (paddle.y + paddle.height / 2);
-    let normalizedImpact = impactPoint / (paddle.height / 2);
-    ball.dx *= -1.05;
-    ball.dy = normalizedImpact * canvas.height * 0.3;
-    ball.x = newBallX;
-    paddleHitSound.play();
-    playSound("paddle_hit");
-  }
-
-  function paddlesMovement(deltaTime) {
-    {% if is_player1 %}rightPaddle{% else %}leftPaddle{% endif %}.dy = (keys["KeyW"] ? -paddleSpeed : 0) + (keys["KeyS"] ? paddleSpeed : 0);
-    {% if is_player1 %}rightPaddle{% else %}leftPaddle{% endif %}.y += {% if is_player1 %}rightPaddle{% else %}leftPaddle{% endif %}.dy * deltaTime;
-
-    constrainPaddle({% if is_player1 %}rightPaddle{% else %}leftPaddle{% endif %});
-    if (keys["KeyW"] || keys["KeyS"]) {
-      movePaddle({% if is_player1 %}rightPaddle{% else %}leftPaddle{% endif %}.y);
-    }
-  }
-
-  function constrainPaddle(paddle) {
-    if (paddle.y < grid) {
-      paddle.y = grid;
-    } else if (paddle.y > maxPaddleY) {
-      paddle.y = maxPaddleY;
-    }
-  }
-
-  function ballMovement(deltaTime) {
-    ball.x += ball.dx * deltaTime;
-    ball.y += ball.dy * deltaTime;
-
-    if (ball.y < grid) {
-      ball.y = grid;
-      ball.dy *= -1;
-      if (!ball.resetting) {
-        wallHitSound.play();
-        playSound("wall_hit");
-      }
-    } else if (ball.y + grid > canvas.height - grid) {
-      ball.y = canvas.height - grid * 2;
-      ball.dy *= -1;
-      if (!ball.resetting) {
-        wallHitSound.play();
-        playSound("wall_hit");
-      }
+    if (keysPressed["KeyS"] && !lastKeysPressed["KeyS"]) {
+      socket.send(JSON.stringify({ type: "down", event: "keydown" }));
+    } else if (!keysPressed["KeyS"] && lastKeysPressed["KeyS"]) {
+      socket.send(JSON.stringify({ type: "down", event: "keyup" }));
     }
 
-    if ((ball.x < 0 || (ball.x + ballSize) > canvas.width) && !ball.resetting) {
-      ball.resetting = true;
-      updateScore();
-      resetBall();
-    }
-  }
-
-  function updateScore() {
-    if (ball.x < 0) {
-      rightScore++;
-      updateScoreEvent();
-    } else if ((ball.x + ballSize) > canvas.width) {
-      leftScore++;
-      updateScoreEvent();
-    }
-    drawScoreboard();
-    {% comment %} if (leftScore >= 3) {
-      endGame("Você ganhou", "{{ user.id }}", scoreUser1, scoreUser2);
-    } else if (rightScore >= 3) {
-      endGame("Você perdeu", {% if is_player1 %} "{{ match.user2.id }}" {% else %} "{{ match.user1.id }}" {% endif %}, scoreUser1, scoreUser2);
-    } {% endcomment %}
-  }
-
-  function resetBall() {
-    setTimeout(() => {
-      ball.resetting = false;
-      ball.x = canvas.width / 2;
-      ball.y = canvas.height / 2;
-      ball.dx = (Math.random() > 0.5 ? 1 : -1) * canvas.width * 0.4;
-      ball.dy = (Math.random() > 0.5 ? 1 : -1) * canvas.width * 0.4;
-    }, 1000 + Math.random() * 500);
+    lastKeysPressed = { ...keysPressed };
   }
 
   function draw() {
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     context.fillStyle = "white";
-    context.fillRect(leftPaddle.x, leftPaddle.y, leftPaddle.width, leftPaddle.height);
-    context.fillRect(rightPaddle.x, rightPaddle.y, rightPaddle.width, rightPaddle.height);
-    context.fillRect(ball.x, ball.y, ball.width, ball.height);
+    if (leftPaddle && leftPaddle.x && leftPaddle.y && leftPaddle.width && leftPaddle.height) {
+      context.fillRect(leftPaddle.x, leftPaddle.y, leftPaddle.width, leftPaddle.height);
+    }
+    if (rightPaddle && rightPaddle.x && rightPaddle.y && rightPaddle.width && rightPaddle.height) {
+      context.fillRect(rightPaddle.x, rightPaddle.y, rightPaddle.width, rightPaddle.height);
+    }
+    if (ball && ball.x && ball.y && ball.width && ball.height) {
+      context.fillRect(ball.x, ball.y, ball.width, ball.height);
+    }
 
     context.drawImage(scoreboardCanvas, 0, 0);
     context.drawImage(backgroundCanvas, 0, 0);
@@ -249,6 +120,26 @@ document.addEventListener("DOMContentLoaded", () => {
     scoreboardContext.fillText(rightScore, scoreboardCanvas.width * 0.75, scoreboardCanvas.height * 0.1);
   }
 
+  function drawEndGameScreen(winner) {
+    context.fillStyle = "rgba(0, 0, 0, 0.7)";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    context.fillStyle = "white";
+    context.font = canvas.height * 0.06 + "px Arial";
+    context.textAlign = "center";
+    context.fillText(winner + "{% translate ' ganhou!' %}", canvas.width / 2, canvas.height / 2);
+  }
+
+  function drawStartGameScreen(winner) {
+    context.fillStyle = "rgba(0, 0, 0, 0.7)";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+
+    context.fillStyle = "white";
+    context.font = canvas.height * 0.06 + "px Arial";
+    context.textAlign = "center";
+    context.fillText("{% translate 'Esperando o adversário entrar na partida' %}", canvas.width / 2, canvas.height / 2);
+  }
+
   function adjustCanvasResolution() {
     const dpr = window.devicePixelRatio || 1;
     const width = canvas.clientWidth * dpr;
@@ -263,26 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
     createBackground();
     drawScoreboard();
     draw();
-    drawWidthHeight();
-  }
-
-  function collides(obj1, obj2) {
-    return (
-      obj1.x < obj2.x + obj2.width &&
-      obj1.x + obj1.width > obj2.x &&
-      obj1.y < obj2.y + obj2.height &&
-      obj1.y + obj1.height > obj2.y
-    );
-  }
-
-  function drawEndGameScreen() {
-    context.fillStyle = "rgba(0, 0, 0, 0.7)";
-    context.fillRect(0, 0, canvas.width, canvas.height);
-
-    context.fillStyle = "white";
-    context.font = canvas.height * 0.06 + "px Arial";
-    context.textAlign = "center";
-    context.fillText(winner, canvas.width / 2, canvas.height / 2);
+    drawStartGameScreen();
   }
 
   function adjustCanvasSize() {
@@ -304,103 +176,58 @@ document.addEventListener("DOMContentLoaded", () => {
 
   socket.onmessage = (event) => {
     const data = JSON.parse(event.data);
-    if (data.type === "update_paddle") {
-      if (data.user_id !== "{{ user.id }}") {
-        {% if is_player1 %}leftPaddle{% else %}rightPaddle{% endif %}.y = data.position * canvas.height;
-      }
-    } else if (data.type === "start_game") {
-      startGame = true;
-    }
-    {% if not is_player1 %}
-    else if (data.type === "update_ball") {
-      ball.x = data.ball_x * canvas.width;
-      ball.y = data.ball_y * canvas.height;
-    } else if (data.type === "update_score") {
-      leftScore = data.left_score;
-      rightScore = data.right_score;
-      drawScoreboard();
-    } else if (data.type === "sound_play") {
-      if (data.sound === "paddle_hit") {
+
+    rightPaddle.x = data.game.paddles.right_paddle.x * grid;
+    rightPaddle.y = data.game.paddles.right_paddle.y * grid;
+    rightPaddle.width = data.game.paddles.right_paddle.width * grid;
+    rightPaddle.height = data.game.paddles.right_paddle.height * grid;
+
+    leftPaddle.x = data.game.paddles.left_paddle.x * grid;
+    leftPaddle.y = data.game.paddles.left_paddle.y * grid;
+    leftPaddle.width = data.game.paddles.left_paddle.width * grid;
+    leftPaddle.height = data.game.paddles.left_paddle.height * grid;
+
+    ball.x = data.game.ball.x * grid;
+    ball.y = data.game.ball.y * grid;
+    ball.width = data.game.ball.width * grid;
+    ball.height = data.game.ball.height * grid;
+
+    leftScore = data.game.score.left_score;
+    rightScore = data.game.score.right_score;
+
+    for (const event of data.events) {
+      if (event.type === "game_start") {
+        gameStart = true;
+        requestAnimationFrame(loop);
+      } else if (event.type === "paddle_hit") {
         paddleHitSound.play();
-      } else if (data.sound === "wall_hit") {
+      } else if (event.type === "wall_hit") {
         wallHitSound.play();
+      } else if (event.type === "score_update") {
+        drawScoreboard();
+      } else if (event.type === "game_over") {
+        gameOver = true;
+        drawEndGameScreen(event.winner);
       }
     }
-    {% endif %}
   };
-
-  function playSound(sound) {
-    if (socket.readyState === WebSocket.OPEN) {
-      socket.send(JSON.stringify({
-        event: "play_sound",
-        sound: sound
-      }));
-    }
-  }
-
-  function movePaddle(y) {
-    if (socket.readyState === WebSocket.OPEN) {
-      let normalizedY = y / canvas.height;
-      socket.send(JSON.stringify({
-        event: "update_paddle",
-        user_id: "{{ user.id }}",
-        position: normalizedY
-      }));
-    }
-  }
-
-  function updateBall(x, y) {
-    if (socket.readyState === WebSocket.OPEN) {
-      socket.send(JSON.stringify({
-        event: "update_ball",
-        ball_x: x / canvas.width,
-        ball_y: y / canvas.height
-      }));
-    }
-  }
-
-  function updateScoreEvent() {
-    if (socket.readyState === WebSocket.OPEN) {
-      socket.send(JSON.stringify({
-        event: "update_score",
-        right_score: rightScore,
-        left_score: leftScore
-      }));
-    }
-  }
-
-  function endGame(winningPlayer, winnerId, scoreUser1, scoreUser2) {
-    gameOver = true;
-    winner = winningPlayer;
-    setTimeout(drawEndGameScreen, 500);
-
-    if (socket.readyState === WebSocket.OPEN) {
-      socket.send(JSON.stringify({
-        event: "game_over",
-        winner_id: winnerId,
-        score_user1: scoreUser1,
-        score_user2: scoreUser2
-      }));
-    }
-  }
 
   document.addEventListener("keydown", (e) => {
     if (["KeyW", "KeyS"].includes(e.code)) {
       e.preventDefault();
-      keys[e.code] = true;
+      keysPressed[e.code] = true;
     }
   });
 
   document.addEventListener("keyup", (e) => {
     if (["KeyW", "KeyS"].includes(e.code)) {
       e.preventDefault();
-      keys[e.code] = false;
+      keysPressed[e.code] = false;
     }
   });
 
   adjustCanvasSize();
   adjustCanvasResolution();
-  requestAnimationFrame(loop);
 });
 </script>
 {% endblock %}

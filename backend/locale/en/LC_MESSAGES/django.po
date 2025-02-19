@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-17 11:43-0300\n"
-"PO-Revision-Date: 2025-02-15 00:42-0300\n"
+"POT-Creation-Date: 2025-02-19 13:29-0300\n"
+"PO-Revision-Date: 2025-02-19 13:31-0300\n"
 "Last-Translator:   <super@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -66,8 +66,12 @@ msgid "Match created successfully"
 msgstr "Match created successfully"
 
 #: apps/matchmaking/views.py:39
+msgid "Match already finished"
+msgstr "Match already finished"
+
+#: apps/matchmaking/views.py:43
 msgid "You are not part of this match"
-msgstr ""
+msgstr "You are not part of this match"
 
 #: apps/users/forms.py:8
 msgid "Nome de login"
@@ -230,6 +234,14 @@ msgstr "Spanish"
 #: templates/chat/room.html:7 templates/users/chat.html:15
 msgid "Enviar"
 msgstr "Submit"
+
+#: templates/matchmaking/pong.html:130
+msgid " ganhou!"
+msgstr " won!"
+
+#: templates/matchmaking/pong.html:140
+msgid "Esperando o adversário entrar na partida"
+msgstr "Waiting for the opponent to enter the match"
 
 #: templates/shared/partials/_messages.html:22
 msgid "Sucesso"
