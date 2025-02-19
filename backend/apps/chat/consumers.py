@@ -1,7 +1,8 @@
 import json
 
-from asgiref.sync import async_to_sync
+from asgiref.sync import sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
+from .models import Message
 
 class ChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
@@ -20,11 +21,16 @@ class ChatConsumer(AsyncWebsocketConsumer):
     # Receive message from WebSocket
     async def receive(self, text_data):
         text_data_json = json.loads(text_data)
-        message = text_data_json["message"]
+        message_content = text_data_json["message"]
+
+        # Save message on postgres
+        await sync_to_async(Message.objects.create)(
+            sender=self.scope["user"], content=message_content
+        )
 
         # Send message to room group
         await self.channel_layer.group_send(
-            self.room_group_name, {"type": "chat.message", "message": message}
+            self.room_group_name, {"type": "chat.message", "message": message_content}
         )
 
     # Receive message from room group
