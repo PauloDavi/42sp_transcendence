@@ -307,23 +307,23 @@ msgstr "En línea"
 msgid "Offline"
 msgstr "Desconectado"
 
-#: templates/users/login.html:8 templates/users/register.html:25
+#: templates/users/login.html:75 templates/users/register.html:79
 msgid "Login"
 msgstr "Conectar"
 
-#: templates/users/login.html:25
+#: templates/users/login.html:92
 msgid "Logar"
 msgstr "Acceso"
 
-#: templates/users/login.html:29
+#: templates/users/login.html:96
 msgid "Login com 42"
 msgstr "Enter with 42"
 
-#: templates/users/login.html:31 templates/users/register.html:24
+#: templates/users/login.html:98 templates/users/register.html:78
 msgid "Cadastrar"
 msgstr "Registro"
 
-#: templates/users/login.html:41
+#: templates/users/login.html:108
 msgid "Autenticando"
 msgstr "Autenticando"
 
@@ -395,7 +395,7 @@ msgstr "No se encontraron usuarios"
 msgid "Erro ao buscar usuários"
 msgstr "Error al buscar usuarios"
 
-#: templates/users/register.html:7
+#: templates/users/register.html:61
 msgid "Cadastro"
 msgstr "Registro"
 
